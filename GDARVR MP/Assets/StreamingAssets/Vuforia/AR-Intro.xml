@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="elden-ring" size="1.000000 1.110871" />
+    <ImageTarget name="hollow-knight-cliff" size="1.000000 0.562500" />
+    <ImageTarget name="blue-bubbles" size="1.000000 0.625000" />
+    <ImageTarget name="bloons" size="1.000000 1.020225" />
+    <ImageTarget name="missing-texture" size="1.000000 1.000000" />
+    <ImageTarget name="rounded-rocks-texture" size="1.000000 0.750000" />
+    <ImageTarget name="craggy-wall" size="1.000000 0.668945" />
+    <ImageTarget name="dlsu-logo" size="1.000000 1.014955" />
+  </Tracking>
+</QCARConfig>
