@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelName: First Level
   SceneName: Level 2
-  levelPreview: {fileID: 0}
-  levelNumber: 1
+  levelPreview: {fileID: 21300000, guid: 2ab79e33261ac3149a3173b43f013448, type: 3}
+  levelNumber: 2
+  isLocked: 0
