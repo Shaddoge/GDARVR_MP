@@ -28,7 +28,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 2
-        value: {x: 0, y: 360, z: 0}
+        value: {x: 0, y: -360, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -38,24 +38,24 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Protector
+    path: Model/Protector
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: {x: 0, y: 0, z: 0}
-        inSlope: {x: 0, y: -179.42719, z: 0}
-        outSlope: {x: 0, y: -179.42719, z: 0}
+        inSlope: {x: 0, y: 181.8794, z: 0}
+        outSlope: {x: 0, y: 181.8794, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
-        outWeight: {x: 0.33333334, y: 0.9980783, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.9994508, z: 0.33333334}
       - serializedVersion: 3
         time: 2
-        value: {x: 0, y: -360, z: 0}
-        inSlope: {x: 0, y: -180.51349, z: 0}
-        outSlope: {x: 0, y: -180.51349, z: 0}
+        value: {x: 0, y: 359.999, z: 0}
+        inSlope: {x: 0, y: 178.92383, z: 0}
+        outSlope: {x: 0, y: 178.92383, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 1, z: 0.33333334}
@@ -63,7 +63,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Crystal
+    path: Model/Crystal
   m_PositionCurves: []
   m_ScaleCurves: []
   m_FloatCurves: []
@@ -76,14 +76,14 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 3769939914
+      path: 2817615199
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1211573893
+      path: 931829009
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -136,7 +136,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Protector
+    path: Model/Protector
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -153,7 +153,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 2
-        value: 360
+        value: -360
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -164,7 +164,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Protector
+    path: Model/Protector
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -192,7 +192,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Protector
+    path: Model/Protector
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -220,7 +220,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Crystal
+    path: Model/Crystal
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -229,17 +229,17 @@ AnimationClip:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: -179.42719
-        outSlope: -179.42719
+        inSlope: 181.8794
+        outSlope: 181.8794
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.9980783
+        outWeight: 0.9994508
       - serializedVersion: 3
         time: 2
-        value: -360
-        inSlope: -180.51349
-        outSlope: -180.51349
+        value: 359.999
+        inSlope: 178.92383
+        outSlope: 178.92383
         tangentMode: 0
         weightedMode: 0
         inWeight: 1
@@ -248,7 +248,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Crystal
+    path: Model/Crystal
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -276,7 +276,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Crystal
+    path: Model/Crystal
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves:
@@ -286,8 +286,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Protector
+    attribute: m_LocalEulerAngles.x
+    path: Model/Protector
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -297,37 +297,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Protector
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Protector
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Crystal
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Crystal
+    path: Model/Protector
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -337,7 +307,37 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Crystal
+    path: Model/Protector
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Model/Crystal
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Model/Crystal
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Model/Crystal
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0
