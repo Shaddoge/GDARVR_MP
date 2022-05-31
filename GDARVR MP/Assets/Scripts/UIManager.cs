@@ -4,23 +4,19 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-
-    // Start is called before the first frame update
+    [SerializeField] private GameObject gameOverPanel;
+    
     void Start()
     {
+        gameOverPanel.SetActive(false);
         EventManager.Instance.OnGameOver += GameOverPopUp;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void GameOverPopUp()
     {
         // Should enable game over screen
         Debug.Log("POP UP GAME OVER");
+        gameOverPanel.SetActive(true);
     }
 
     private void OnDestroy()
