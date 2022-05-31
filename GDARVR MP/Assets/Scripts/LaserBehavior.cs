@@ -42,6 +42,12 @@ public class LaserBehavior : MonoBehaviour
 
                 if (!hit.transform.CompareTag("Mirror") && reflectOnlyMirror)
                 {
+                    if (hit.transform.CompareTag("Crystal"))
+                    {
+                    CrystalBehavior crystal = hit.transform.GetComponent<CrystalBehavior>();
+                    crystal.HeatUp();
+                    }
+
                     for (int j = i + 1; j <= maxReflect; j++)
                     {
                         laser.SetPosition(j, hit.point);
