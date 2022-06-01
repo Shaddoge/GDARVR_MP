@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         gameOverPanel.SetActive(false);
-        EventManager.Instance.OnGameOver += GameOverPopUp;
+        EventManager.Instance.OnGameClear += GameOverPopUp;
     }
 
     private void GameOverPopUp()
@@ -21,6 +21,6 @@ public class UIManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventManager.Instance.OnGameOver -= GameOverPopUp;
+        EventManager.Instance.OnGameClear -= GameOverPopUp;
     }
 }

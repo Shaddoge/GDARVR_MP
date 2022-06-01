@@ -6,41 +6,64 @@ using System;
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
-    public static GameManager Instance
-    {
-        get
-        {
-            if(instance == null)
-                instance = GameObject.FindObjectOfType<GameManager>();
-            return instance;
-        }
-    }
+    public static GameManager Instance { get{ return instance; } }
+    private bool existing = false;
+
+    private int levelCleared = 0;
+    public int LevelCleared { get{ return levelCleared; } }
+
+    private int levelCurrent = 0;
+    public int LevelCurrent { get{ return levelCurrent; } }
 
     // Start is called before the first frame update
     void Start()
     {
+        if(instance != null)
+        {
+            existing = true;
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
         EventManager.Instance.OnCrystalCharged += CrystalCharged;
+        EventManager.Instance.OnLevelChanged += LevelChanged;
     }
 
     private void CrystalCharged()
     {
-        StartCoroutine(GameOverDelay(2));
+        StartCoroutine(GameClearDelay(2));
     }
 
-    private IEnumerator GameOverDelay(float time)
+    private IEnumerator GameClearDelay(float time)
     {
         yield return new WaitForSeconds(time);
-        GameOver();
+        GameClear();
     }
 
-    private void GameOver()
+    private void GameClear()
     {
+        // Update level cleared
+        if(levelCleared < levelCurrent)
+        {
+            levelCleared = levelCurrent;
+        }
         // Should call UI Manager to popup game over screen
-        EventManager.Instance?.GameOver();
+        EventManager.Instance?.GameClear();
+    }
+
+    private void LevelChanged(int levelNum)
+    {
+        levelCurrent = levelNum;
     }
 
     private void OnDestroy()
     {
-        EventManager.Instance.OnCrystalCharged -= CrystalCharged;
+        if(!existing)
+        {
+            EventManager.Instance.OnCrystalCharged -= CrystalCharged;
+            EventManager.Instance.OnLevelChanged -= LevelChanged;
+        }
     }
 }

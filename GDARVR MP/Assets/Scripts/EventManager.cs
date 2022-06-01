@@ -6,30 +6,26 @@ using System;
 public class EventManager : MonoBehaviour
 {
     private static EventManager instance;
-    public static EventManager Instance
-    {
-        get
-        {
-            if(instance == null)
-                instance = GameObject.FindObjectOfType<EventManager>();
-            return instance;
-        }
-    }
-     
+    public static EventManager Instance { get{ return instance; } }
+
     public event Action<bool> OnPlatformTracked;
     public event Action<bool> OnMirrorTracked;
 
     public event Action OnCrystalCharged;
-    public event Action OnRestart, OnGameOver;
-
+    public event Action OnRestart, OnGameClear;
+    public event Action<int> OnLevelChanged;
 
     // Start is called before the first frame update
     void Awake()
     {
-        if (instance == null)
-            instance = this;
+        if(instance != null)
+        {
+            Destroy(gameObject);
+        }
         else
-            Destroy(this.gameObject);
+        {
+            instance = this;
+        }
     }
 
     public void PlatformTracked(bool isTracked)
@@ -56,11 +52,19 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public void GameOver()
+    public void GameClear()
     {
-        if(OnGameOver != null)
+        if(OnGameClear != null)
         {
-            OnGameOver();
+            OnGameClear();
+        }
+    }
+
+    public void LevelChanged(int levelNum)
+    {
+        if(OnLevelChanged != null)
+        {
+            OnLevelChanged(levelNum);
         }
     }
 }
