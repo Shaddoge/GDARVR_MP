@@ -3,8 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneManagerScript : MonoBehaviour
+public class SCENE_MANAGER : MonoBehaviour
 {
+    // Singleton
+
+    public static SCENE_MANAGER instance = null;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +57,11 @@ public class SceneManagerScript : MonoBehaviour
     public void OpenMainMenu()
     {
         SceneManager.LoadScene("Mainmenu");
-        Debug.Log("Application Closed");
+        Debug.Log("Mainmenu");
+    }
+
+    public void LoadSelectedLevel(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }
