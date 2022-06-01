@@ -16,4 +16,4 @@ MonoBehaviour:
   SceneName: Level 3
   levelPreview: {fileID: 21300000, guid: 87398bf15e97c0241b01aa5e90114da7, type: 3}
   levelNumber: 3
-  isLocked: 0
+  isLocked: 1

@@ -7,16 +7,24 @@ using UnityEngine.EventSystems;
 public class ButtonManager : MonoBehaviour
 {
     public List<GameObject> LevelButtonList;
+
     public string levelSceneNameToLoad;
+    public int levelNum;
     [SerializeField] float buttonAlpha = 0.5f;
     [SerializeField] int unlockedLevels = 1;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        //LevelButtonList = new List<GameObject>();
-        UpdateAvailableLevels(unlockedLevels);
-        UpdateAvailableButtons();
+        EventManager.Instance.OnUnlockLevel += UpdateAvailableLevels;
+
+        unlockedLevels = GameManager.Instance.LevelCleared + 1;
+
+        EventManager.Instance?.UnlockLevels(unlockedLevels);
+
+        Debug.Log("Levels Unlocked:" + unlockedLevels);
     }
 
     // Update is called once per frame
@@ -27,27 +35,35 @@ public class ButtonManager : MonoBehaviour
 
     public void SelectThisLevel()
     {
+        // retrieves the level details of the selected level
         if (EventSystem.current.currentSelectedGameObject.CompareTag("LevelButton") == true)
         {
             LevelDetails levelDetails = EventSystem.current.currentSelectedGameObject.GetComponent <LevelDetails>();// get level details comp
 
-            levelSceneNameToLoad = levelDetails.level.SceneName;
+            // updates the level scene name and level number to load
+            levelSceneNameToLoad = levelDetails.level.SceneName; 
+            levelNum = levelDetails.level.levelNumber;
         }
     }
     public void StartSelectedLevel()
     {
+        // loads the selected level
         Debug.Log("Current Selected Level: " + levelSceneNameToLoad);
 
         SCENE_MANAGER.instance.LoadSelectedLevel(levelSceneNameToLoad);
+        EventManager.Instance?.LevelChanged(levelNum);
+
     }
 
     public void UpdateAvailableLevels(int nUnlockedLevels)
     {
-        Mathf.Clamp(nUnlockedLevels, 1.0f, LevelButtonList.Count);
+        //Mathf.Clamp(nUnlockedLevels, 1.0f, LevelButtonList.Count);
+
         for (int i = 0; i < nUnlockedLevels; i++)
         {
             LevelButtonList[i].GetComponent<LevelDetails>().level.isLocked = false;
         }
+        UpdateAvailableButtons();
     }
     public void UpdateAvailableButtons()
     {
@@ -78,9 +94,14 @@ public class ButtonManager : MonoBehaviour
         }
     }
 
-    
+    private void OnDestroy()
+    {
+       EventManager.Instance.OnUnlockLevel -= UpdateAvailableLevels;
+    }
 
 
-    
-  
+
+
+
+
 }

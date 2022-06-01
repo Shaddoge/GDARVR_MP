@@ -37,9 +37,14 @@ public class SCENE_MANAGER : MonoBehaviour
     {
         // start new game
         // locks all levels
-
-        SceneManager.LoadScene("Main");
+        if (GameManager.Instance.LevelCleared == 0)
+        {
+            GameManager.Instance.levelCurrent = 1;
+        }
+        Debug.Log("Curent Level: "+ GameManager.Instance.levelCurrent);
+        SceneManager.LoadScene("test");
         Debug.Log("New Game");
+
     }
 
     public void OpenLevelSelect()
