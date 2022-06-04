@@ -12,8 +12,8 @@ public class GameManager : MonoBehaviour
     private int levelCleared = 0;
     public int LevelCleared { get{ return levelCleared; } }
 
-    private int levelCurrent = 0;
-    public int LevelCurrent { get{ return levelCurrent; } }
+    public int levelCurrent = 0;
+   //public int LevelCurrent { get{ return levelCurrent; } }
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
         else
         {
             instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
         EventManager.Instance.OnCrystalCharged += CrystalCharged;
         EventManager.Instance.OnLevelChanged += LevelChanged;
@@ -49,14 +50,17 @@ public class GameManager : MonoBehaviour
         {
             levelCleared = levelCurrent;
         }
+
         // Should call UI Manager to popup game over screen
         EventManager.Instance?.GameClear();
+
     }
 
     private void LevelChanged(int levelNum)
     {
         levelCurrent = levelNum;
     }
+
 
     private void OnDestroy()
     {

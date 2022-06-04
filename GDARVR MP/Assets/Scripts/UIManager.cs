@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     {
         // Should enable game over screen
         Debug.Log("POP UP GAME OVER");
+        Debug.Log("Current Level: " + GameManager.Instance.levelCurrent);
         gameOverPanel.SetActive(true);
     }
 

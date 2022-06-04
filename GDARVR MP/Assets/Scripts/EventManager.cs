@@ -6,6 +6,8 @@ using System;
 public class EventManager : MonoBehaviour
 {
     private static EventManager instance;
+
+    private bool existing = false;
     public static EventManager Instance { get{ return instance; } }
 
     public event Action<bool> OnPlatformTracked;
@@ -15,16 +17,20 @@ public class EventManager : MonoBehaviour
     public event Action OnRestart, OnGameClear;
     public event Action<int> OnLevelChanged;
 
+    public event Action<int> OnUnlockLevel;
+
     // Start is called before the first frame update
     void Awake()
     {
         if(instance != null)
         {
+            existing = true;
             Destroy(gameObject);
         }
         else
         {
             instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
     }
 
@@ -65,6 +71,14 @@ public class EventManager : MonoBehaviour
         if(OnLevelChanged != null)
         {
             OnLevelChanged(levelNum);
+        }
+    }
+
+    public void UnlockLevels(int nLevelsUnlocked)
+    {
+        if (OnUnlockLevel != null)
+        {
+            OnUnlockLevel(nLevelsUnlocked);
         }
     }
 }
