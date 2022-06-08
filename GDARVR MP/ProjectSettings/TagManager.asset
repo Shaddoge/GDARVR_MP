@@ -7,6 +7,8 @@ TagManager:
   - Mirror
   - Crystal
   - LevelButton
+  - PlatformTarget
+  - MirrorTarget
   layers:
   - Default
   - TransparentFX

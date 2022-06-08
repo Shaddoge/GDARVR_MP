@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
         EventManager.Instance.OnCrystalCharged += CrystalCharged;
+        EventManager.Instance.OnNextLevelClick += PlayNextLevel;
         EventManager.Instance.OnLevelChanged += LevelChanged;
     }
 
@@ -61,6 +62,11 @@ public class GameManager : MonoBehaviour
         levelCurrent = levelNum;
     }
 
+    private void PlayNextLevel()
+    {
+        string nextLevelName = "Level " + (levelCurrent + 1).ToString();
+        EventManager.Instance?.NextLevel(nextLevelName);
+    }
 
     private void OnDestroy()
     {

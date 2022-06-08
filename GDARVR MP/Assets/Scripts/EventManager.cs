@@ -15,6 +15,12 @@ public class EventManager : MonoBehaviour
 
     public event Action OnCrystalCharged;
     public event Action OnRestart, OnGameClear;
+
+    public event Action OnLevelSelect;
+
+    public event Action OnNextLevelClick;
+    public event Action<string> OnNextLevel;
+
     public event Action<int> OnLevelChanged;
 
     public event Action<int> OnUnlockLevel;
@@ -63,6 +69,30 @@ public class EventManager : MonoBehaviour
         if(OnGameClear != null)
         {
             OnGameClear();
+        }
+    }
+
+    public void LevelSelect()
+    {
+        if(OnLevelSelect != null)
+        {
+            OnLevelSelect();
+        }
+    }
+
+    public void NextLevelClick()
+    {
+        if(OnNextLevelClick != null)
+        {
+            OnNextLevelClick();
+        }
+    }
+
+    public void NextLevel(string levelName)
+    {
+        if(OnNextLevel != null)
+        {
+            OnNextLevel(levelName);
         }
     }
 
