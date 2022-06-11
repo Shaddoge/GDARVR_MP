@@ -5,7 +5,9 @@ using Vuforia;
 
 public class MirrorTracker : MonoBehaviour
 {
-    private List<ObserverBehaviour> mirrorTargets = new List<ObserverBehaviour>();
+    [SerializeField] private List<ObserverBehaviour> mirrorTargets = new List<ObserverBehaviour>();
+    [SerializeField] private List<bool> isTracked = new List<bool>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +19,8 @@ public class MirrorTracker : MonoBehaviour
             {
                 ObserverBehaviour mirrorTarget = targetObjects[i].GetComponent<ObserverBehaviour>();
                 mirrorTargets.Add(mirrorTarget);
-                //mirrorTarget.OnTargetStatusChanged += OnTargetStatusChanged;;
+                isTracked.Add(false);
+                mirrorTarget.OnTargetStatusChanged += OnTargetStatusChanged;
             }
         }
         else
@@ -26,18 +29,77 @@ public class MirrorTracker : MonoBehaviour
         }
     }
 
-     void OnTargetStatusChanged(ObserverBehaviour target, TargetStatus targetStatus)
+    private void Update()
     {
+        for(int i = 0; i < mirrorTargets.Count; i++)
+        {
+            if(isTracked[i])
+            {
+                Debug.Log("CHECKINGGGGG");
+                MirrorPlacer.Instance?.RayCastFromARCamera(TranslationTargetPosToScreenSpace(i), i);
+            }
+        }
         
     }
 
-    public void OnTargetDetected()
+    void OnTargetStatusChanged(ObserverBehaviour target, TargetStatus targetStatus)
     {
-        
+        Debug.Log(target.gameObject);
+
+        if(targetStatus.Status == Status.TRACKED)
+        {
+            OnTargetDetected(target.gameObject);
+        }
+        else
+        {
+            OnTargetLost(target.gameObject);
+        }
     }
 
-    public void OnTargetLost()
+    public void OnTargetDetected(GameObject target)
     {
+        int index = 0;
+        bool objFound = false;
+        Debug.Log("TARG: " + target);
+        for(int i = 0; i < mirrorTargets.Count; i++)
+        {
+            Debug.Log("TARG: " + GameObject.ReferenceEquals(mirrorTargets[i].gameObject, target));
+            if(GameObject.ReferenceEquals(mirrorTargets[i].gameObject, target))
+            {
+                objFound = true;
+                index = i;
+                break;
+            }
+        }
         
+        if(!objFound) return;
+        Debug.Log("TARGEEEEEEEEEET");
+        MirrorPlacer.Instance?.RayCastFromARCamera(TranslationTargetPosToScreenSpace(index), index);
+        isTracked[index] = true;
+    }
+
+    public void OnTargetLost(GameObject target)
+    {
+        int index = 0;
+        bool objFound = false;
+
+        for(int i = 0; i < mirrorTargets.Count; i++)
+        {
+            if(mirrorTargets[i] == target)
+            {
+                objFound = true;
+                index = i;
+                break;
+            }
+        }
+
+        if(!objFound) return;
+
+        isTracked[index] = false;
+    }
+
+    private Vector2 TranslationTargetPosToScreenSpace(int index)
+    {
+        return Camera.main.WorldToScreenPoint(mirrorTargets[index].transform.position);
     }
 }
