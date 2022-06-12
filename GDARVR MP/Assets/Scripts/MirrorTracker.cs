@@ -37,6 +37,7 @@ public class MirrorTracker : MonoBehaviour
             {
                 Debug.Log("CHECKINGGGGG");
                 MirrorPlacer.Instance?.RayCastFromARCamera(TranslationTargetPosToScreenSpace(i), i);
+                SetMirrorRotationAccordingToTarget(i);
             }
         }
         
@@ -76,6 +77,7 @@ public class MirrorTracker : MonoBehaviour
         Debug.Log("TARGEEEEEEEEEET");
         MirrorPlacer.Instance?.RayCastFromARCamera(TranslationTargetPosToScreenSpace(index), index);
         isTracked[index] = true;
+
     }
 
     public void OnTargetLost(GameObject target)
@@ -102,4 +104,10 @@ public class MirrorTracker : MonoBehaviour
     {
         return Camera.main.WorldToScreenPoint(mirrorTargets[index].transform.position);
     }
+
+    public void SetMirrorRotationAccordingToTarget(int i)
+    {
+        GameObject mirr = MirrorPlacer.Instance.GetMirror(i);
+        mirr.transform.localRotation = Quaternion.Euler(90.0f, 0.0f, -mirrorTargets[i].gameObject.transform.rotation.eulerAngles.y);
+    }    
 }

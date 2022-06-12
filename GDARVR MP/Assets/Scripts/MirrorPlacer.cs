@@ -32,7 +32,11 @@ public class MirrorPlacer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //foreach(GameObject mirror in mirrors)
+        //{
+        //    Vector3 parentRotation = mirror.transform.parent.rotation.eulerAngles;
+        //    mirror.transform.rotation = Quaternion.Euler(new Vector3())
+        //}
     }
 
     public void RayCastFromARCamera(Vector2 touchPos, int objIndex)
@@ -67,5 +71,10 @@ public class MirrorPlacer : MonoBehaviour
         {
             instance = null;
         }
+    }
+
+    public GameObject GetMirror(int i)
+    {
+        return mirrors[i];
     }
 }
