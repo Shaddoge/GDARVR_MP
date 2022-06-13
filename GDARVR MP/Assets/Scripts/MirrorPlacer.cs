@@ -16,7 +16,8 @@ public class MirrorPlacer : MonoBehaviour
         if(instance != null)
         {
             existing = true;
-            Destroy(gameObject);
+            Destroy(this.gameObject);
+            return;
         }
         else
         {
@@ -45,7 +46,6 @@ public class MirrorPlacer : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit, 100, LayerMask.GetMask("MirrorPlane")))
         {
-            Debug.Log("HIT");
             Vector3 hitPoint = hit.point;
             // Spawn mirror here
             PlaceMirror(hitPoint, objIndex);
@@ -57,7 +57,9 @@ public class MirrorPlacer : MonoBehaviour
         if(objIndex < 0 || objIndex >= mirrors.Count) return;
 
         mirrors[objIndex].SetActive(true);
-        mirrors[objIndex].transform.position = position;
+        Debug.Log($"Positions: {position.x}, {position.z}");
+        Vector3 gridPos = new Vector3(Mathf.Round(position.x), this.transform.position.y, Mathf.Round(position.z));
+        mirrors[objIndex].transform.position = gridPos;
     }
 
     public void DisableMirror(int index)

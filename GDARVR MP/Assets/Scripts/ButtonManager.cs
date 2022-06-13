@@ -50,9 +50,8 @@ public class ButtonManager : MonoBehaviour
         // loads the selected level
         Debug.Log("Current Selected Level: " + levelSceneNameToLoad);
 
-        SCENE_MANAGER.instance.LoadSelectedLevel(levelSceneNameToLoad);
-        EventManager.Instance?.LevelChanged(levelNum);
-
+        SCENE_MANAGER.instance.LoadLevelByNum(levelNum);
+        //EventManager.Instance?.LevelChanged(levelNum);
     }
 
     public void UpdateAvailableLevels(int nUnlockedLevels)

@@ -35,7 +35,6 @@ public class MirrorTracker : MonoBehaviour
         {
             if(isTracked[i])
             {
-                Debug.Log("CHECKINGGGGG");
                 MirrorPlacer.Instance?.RayCastFromARCamera(TranslationTargetPosToScreenSpace(i), i);
                 SetMirrorRotationAccordingToTarget(i);
             }
@@ -108,6 +107,8 @@ public class MirrorTracker : MonoBehaviour
     public void SetMirrorRotationAccordingToTarget(int i)
     {
         GameObject mirr = MirrorPlacer.Instance.GetMirror(i);
-        mirr.transform.localRotation = Quaternion.Euler(90.0f, 0.0f, -mirrorTargets[i].gameObject.transform.rotation.eulerAngles.y);
+        //mirr.transform.localRotation = Quaternion.Euler(90.0f, 0.0f, -mirrorTargets[i].gameObject.transform.rotation.eulerAngles.y);
+        float rotY = Mathf.Round(mirrorTargets[i].gameObject.transform.rotation.eulerAngles.y / 30) * 30;
+        mirr.transform.localRotation = Quaternion.Euler(0.0f, rotY, 0.0f);
     }    
 }

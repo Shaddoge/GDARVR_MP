@@ -19,7 +19,7 @@ public class EventManager : MonoBehaviour
     public event Action OnLevelSelect;
 
     public event Action OnNextLevelClick;
-    public event Action<string> OnNextLevel;
+    public event Action<int> OnNextLevel;
 
     public event Action<int> OnLevelChanged;
 
@@ -31,7 +31,8 @@ public class EventManager : MonoBehaviour
         if(instance != null)
         {
             existing = true;
-            Destroy(gameObject);
+            Destroy(this.gameObject);
+            return;
         }
         else
         {
@@ -88,11 +89,11 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public void NextLevel(string levelName)
+    public void NextLevel(int levelNum)
     {
         if(OnNextLevel != null)
         {
-            OnNextLevel(levelName);
+            OnNextLevel(levelNum);
         }
     }
 

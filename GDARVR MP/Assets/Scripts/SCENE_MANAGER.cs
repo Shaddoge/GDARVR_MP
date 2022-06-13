@@ -10,26 +10,22 @@ public class SCENE_MANAGER : MonoBehaviour
     public static SCENE_MANAGER instance = null;
     private bool existing = false;
 
-    private void Awake()
+    private void Start()
     {
         if (instance != null)
         {
             existing = true;
-            Destroy(gameObject);
+            Debug.Log("Destroying");
+            Destroy(this.gameObject);
+            return;
         }
         else
         {
             instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
-        EventManager.Instance.OnNextLevel += LoadSelectedLevel;
+        EventManager.Instance.OnNextLevel += LoadLevelByNum;
         EventManager.Instance.OnLevelSelect += OpenLevelSelect;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
@@ -75,11 +71,19 @@ public class SCENE_MANAGER : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public void LoadLevelByNum(int num)
+    {
+        Debug.Log("Loading");
+        SceneManager.LoadScene("Level " + num.ToString());
+        EventManager.Instance?.LevelChanged(num);
+        //GameManager.Instance.levelCurrent = num;
+    }
+
     private void OnDestroy()
     {
         if(!existing)
         {
-            EventManager.Instance.OnNextLevel -= LoadSelectedLevel;
+            EventManager.Instance.OnNextLevel -= LoadLevelByNum;
             EventManager.Instance.OnLevelSelect -= OpenLevelSelect;
         }
     }

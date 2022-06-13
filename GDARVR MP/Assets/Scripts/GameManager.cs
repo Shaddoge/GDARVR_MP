@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public int LevelCleared { get{ return levelCleared; } }
 
     public int levelCurrent = 0;
-   //public int LevelCurrent { get{ return levelCurrent; } }
+    //public int LevelCurrent { get{ return levelCurrent; } }
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,8 @@ public class GameManager : MonoBehaviour
         if(instance != null)
         {
             existing = true;
-            Destroy(gameObject);
+            Destroy(this.gameObject);
+            return;
         }
         else
         {
@@ -64,8 +65,9 @@ public class GameManager : MonoBehaviour
 
     private void PlayNextLevel()
     {
+        Debug.Log($"Level Current: {levelCurrent}");
         string nextLevelName = "Level " + (levelCurrent + 1).ToString();
-        EventManager.Instance?.NextLevel(nextLevelName);
+        EventManager.Instance?.NextLevel(levelCurrent + 1);
     }
 
     private void OnDestroy()
