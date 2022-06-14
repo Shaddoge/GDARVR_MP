@@ -6,26 +6,37 @@ using Vuforia;
 public class MirrorTracker : MonoBehaviour
 {
     [SerializeField] private List<ObserverBehaviour> mirrorTargets = new List<ObserverBehaviour>();
-    [SerializeField] private List<bool> isTracked = new List<bool>();
-
+    private List<bool> isTracked = new List<bool>();
     // Start is called before the first frame update
     void Start()
     {
-        GameObject[] targetObjects = GameObject.FindGameObjectsWithTag("MirrorTarget");
-
-        if(targetObjects.Length > 0)
+        if(mirrorTargets.Count == 0)
         {
-            for (int i = 0; i < targetObjects.Length; i++)
+            GameObject[] targetObjects = GameObject.FindGameObjectsWithTag("MirrorTarget");
+
+            if(targetObjects.Length > 0)
             {
-                ObserverBehaviour mirrorTarget = targetObjects[i].GetComponent<ObserverBehaviour>();
-                mirrorTargets.Add(mirrorTarget);
-                isTracked.Add(false);
-                mirrorTarget.OnTargetStatusChanged += OnTargetStatusChanged;
+                for (int i = 0; i < targetObjects.Length; i++)
+                {
+                    ObserverBehaviour mirrorTarget = targetObjects[i].GetComponent<ObserverBehaviour>();
+                    mirrorTargets.Add(mirrorTarget);
+                    isTracked.Add(false);
+                    mirrorTarget.OnTargetStatusChanged += OnTargetStatusChanged;
+                }
+            }
+            else
+            {
+                Debug.LogError("Mirror Target/s not found!");
             }
         }
         else
         {
-            Debug.LogError("Mirror Target/s not found!");
+            for (int i = 0; i < mirrorTargets.Count; i++)
+            {
+                ObserverBehaviour mirrorTarget = mirrorTargets[i].GetComponent<ObserverBehaviour>();
+                isTracked.Add(false);
+                mirrorTarget.OnTargetStatusChanged += OnTargetStatusChanged;
+            }
         }
     }
 

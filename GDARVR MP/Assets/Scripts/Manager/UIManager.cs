@@ -5,7 +5,8 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject gameOverPanel;
-    
+    [SerializeField] private GameObject[] hud;
+
     void Start()
     {
         gameOverPanel.SetActive(false);
@@ -14,9 +15,12 @@ public class UIManager : MonoBehaviour
 
     private void GameOverPopUp()
     {
-        // Should enable game over screen
-        Debug.Log("POP UP GAME OVER");
-        Debug.Log("Current Level: " + GameManager.Instance.levelCurrent);
+        // Disable HUD
+        for (int i = 0; i < hud.Length; i++)
+        {
+            hud[i].SetActive(false);
+        }
+        // Display Game Over Panel
         gameOverPanel.SetActive(true);
     }
 
