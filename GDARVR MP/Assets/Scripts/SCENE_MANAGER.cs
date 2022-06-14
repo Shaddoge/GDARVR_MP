@@ -43,7 +43,7 @@ public class SCENE_MANAGER : MonoBehaviour
             GameManager.Instance.levelCurrent = 1;
         }
         Debug.Log("Curent Level: "+ GameManager.Instance.levelCurrent);
-        SceneManager.LoadScene("test");
+        LoadLevelByNum(GameManager.Instance.levelCurrent);
         Debug.Log("New Game");
 
     }
