@@ -26,6 +26,8 @@ public class MirrorPlacer : MonoBehaviour
                 mirrors.Add(child.gameObject);
             }
             
+            EventManager.Instance.OnToggleLock += LockMirror;
+
             instance = this;
         }
     }
@@ -40,7 +42,7 @@ public class MirrorPlacer : MonoBehaviour
         //}
     }
 
-    public void RayCastFromARCamera(Vector2 touchPos, int objIndex)
+    public void RayCastFromARCamera(Vector2 touchPos, float rotY, int objIndex)
     {
         Ray ray = Camera.main.ScreenPointToRay(touchPos);
         RaycastHit hit;
@@ -48,23 +50,31 @@ public class MirrorPlacer : MonoBehaviour
         {
             Vector3 hitPoint = hit.point;
             // Spawn mirror here
-            PlaceMirror(hitPoint, objIndex);
+            PlaceMirror(hitPoint, rotY, objIndex);
         }
     }
 
-    public void PlaceMirror(Vector3 position, int objIndex)
+    public void PlaceMirror(Vector3 position, float rotY, int objIndex)
     {
         if(objIndex < 0 || objIndex >= mirrors.Count) return;
+        // Return if locked
+        if(mirrors[objIndex].GetComponent<Mirror>().isLocked) return;
 
         mirrors[objIndex].SetActive(true);
         Debug.Log($"Positions: {position.x}, {position.z}");
         Vector3 gridPos = new Vector3(Mathf.Round(position.x), this.transform.position.y, Mathf.Round(position.z));
         mirrors[objIndex].transform.position = gridPos;
+        mirrors[objIndex].transform.localRotation = Quaternion.Euler(0.0f, rotY, 0.0f);
     }
 
     public void DisableMirror(int index)
     {
 
+    }
+
+    private void LockMirror(int index, bool locked)
+    {
+        mirrors[index].GetComponent<Mirror>().isLocked = locked;
     }
 
     private void OnDestroy()
@@ -73,10 +83,5 @@ public class MirrorPlacer : MonoBehaviour
         {
             instance = null;
         }
-    }
-
-    public GameObject GetMirror(int i)
-    {
-        return mirrors[i];
     }
 }

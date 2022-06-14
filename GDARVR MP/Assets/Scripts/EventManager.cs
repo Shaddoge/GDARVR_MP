@@ -11,7 +11,7 @@ public class EventManager : MonoBehaviour
     public static EventManager Instance { get{ return instance; } }
 
     public event Action<bool> OnPlatformTracked;
-    public event Action<bool> OnMirrorTracked;
+    public event Action<int, bool> OnToggleLock;
 
     public event Action OnCrystalCharged;
     public event Action OnRestart, OnGameClear;
@@ -49,11 +49,11 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public void MirrorTracked(bool isTracked)
+    public void ToggleLocked(int index, bool locked)
     {
-        if(OnMirrorTracked != null)
+        if(OnToggleLock != null)
         {
-            OnMirrorTracked(isTracked);
+            OnToggleLock(index, locked);
         }
     }
 

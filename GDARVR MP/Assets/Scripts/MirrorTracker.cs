@@ -35,8 +35,10 @@ public class MirrorTracker : MonoBehaviour
         {
             if(isTracked[i])
             {
-                MirrorPlacer.Instance?.RayCastFromARCamera(TranslationTargetPosToScreenSpace(i), i);
-                SetMirrorRotationAccordingToTarget(i);
+                Vector3 pos = TranslationTargetPosToScreenSpace(i);
+                float rotY = Mathf.Round(mirrorTargets[i].gameObject.transform.rotation.eulerAngles.y / 30) * 30;
+                MirrorPlacer.Instance?.RayCastFromARCamera(pos, rotY, i);
+                //SetMirrorRotationAccordingToTarget(i);
             }
         }
         
@@ -60,10 +62,9 @@ public class MirrorTracker : MonoBehaviour
     {
         int index = 0;
         bool objFound = false;
-        Debug.Log("TARG: " + target);
+
         for(int i = 0; i < mirrorTargets.Count; i++)
         {
-            Debug.Log("TARG: " + GameObject.ReferenceEquals(mirrorTargets[i].gameObject, target));
             if(GameObject.ReferenceEquals(mirrorTargets[i].gameObject, target))
             {
                 objFound = true;
@@ -73,10 +74,11 @@ public class MirrorTracker : MonoBehaviour
         }
         
         if(!objFound) return;
-        Debug.Log("TARGEEEEEEEEEET");
-        MirrorPlacer.Instance?.RayCastFromARCamera(TranslationTargetPosToScreenSpace(index), index);
+        
+        Vector3 pos = TranslationTargetPosToScreenSpace(index);
+        float rotY = Mathf.Round(mirrorTargets[index].gameObject.transform.rotation.eulerAngles.y / 30) * 30;
+        MirrorPlacer.Instance?.RayCastFromARCamera(pos, rotY, index);
         isTracked[index] = true;
-
     }
 
     public void OnTargetLost(GameObject target)
@@ -102,13 +104,5 @@ public class MirrorTracker : MonoBehaviour
     private Vector2 TranslationTargetPosToScreenSpace(int index)
     {
         return Camera.main.WorldToScreenPoint(mirrorTargets[index].transform.position);
-    }
-
-    public void SetMirrorRotationAccordingToTarget(int i)
-    {
-        GameObject mirr = MirrorPlacer.Instance.GetMirror(i);
-        //mirr.transform.localRotation = Quaternion.Euler(90.0f, 0.0f, -mirrorTargets[i].gameObject.transform.rotation.eulerAngles.y);
-        float rotY = Mathf.Round(mirrorTargets[i].gameObject.transform.rotation.eulerAngles.y / 30) * 30;
-        mirr.transform.localRotation = Quaternion.Euler(0.0f, rotY, 0.0f);
-    }    
+    }  
 }

@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public int LevelCleared { get{ return levelCleared; } }
 
     public int levelCurrent = 0;
+
+    private float levelTime = 0f;
+
     //public int LevelCurrent { get{ return levelCurrent; } }
 
     // Start is called before the first frame update
@@ -61,6 +64,7 @@ public class GameManager : MonoBehaviour
     private void LevelChanged(int levelNum)
     {
         levelCurrent = levelNum;
+        levelTime = 0;
     }
 
     private void PlayNextLevel()
