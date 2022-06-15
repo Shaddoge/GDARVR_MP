@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public int levelCurrent = 0;
 
     private float levelTime = 0f;
+    private bool levelEnded = false;
 
     //public int LevelCurrent { get{ return levelCurrent; } }
 
@@ -37,8 +38,20 @@ public class GameManager : MonoBehaviour
         EventManager.Instance.OnLevelChanged += LevelChanged;
     }
 
+    private void Update()
+    {
+        if (levelEnded) return;
+        levelTime += Time.deltaTime;
+        //Debug.Log(levelTime);
+        if(MenuHUD.Instance)
+        {
+            MenuHUD.Instance?.UpdateTime(levelTime);
+        }
+    }
+
     private void CrystalCharged()
     {
+        levelEnded = true;
         StartCoroutine(GameClearDelay(2));
     }
 
@@ -64,6 +77,7 @@ public class GameManager : MonoBehaviour
     private void LevelChanged(int levelNum)
     {
         levelCurrent = levelNum;
+        levelEnded = false;
         levelTime = 0;
     }
 

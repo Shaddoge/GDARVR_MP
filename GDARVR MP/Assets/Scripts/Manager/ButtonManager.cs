@@ -19,8 +19,15 @@ public class ButtonManager : MonoBehaviour
     void Start()
     {
         EventManager.Instance.OnUnlockLevel += UpdateAvailableLevels;
-
-        unlockedLevels = GameManager.Instance.LevelCleared + 1;
+        
+        if(GameManager.Instance != null)
+        {
+            unlockedLevels = GameManager.Instance.LevelCleared + 1;
+        }
+        else
+        {
+            unlockedLevels = 1;
+        }
 
         EventManager.Instance?.UnlockLevels(unlockedLevels);
 
