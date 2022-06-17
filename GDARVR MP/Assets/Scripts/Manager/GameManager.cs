@@ -9,10 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get{ return instance; } }
     private bool existing = false;
 
-    private int levelCleared = 0;
-    public int LevelCleared { get{ return levelCleared; } }
-
-    public int levelCurrent = 0;
+    [SerializeField] private LevelManager levelManager;
 
     private float levelTime = 0f;
     private bool levelEnded = false;
@@ -64,28 +61,38 @@ public class GameManager : MonoBehaviour
     private void GameClear()
     {
         // Update level cleared
-        if(levelCleared < levelCurrent)
+        /*if(levelCleared < levelCurrent)
         {
             levelCleared = levelCurrent;
-        }
+        }*/
 
         // Should call UI Manager to popup game over screen
-        EventManager.Instance?.GameClear();
+        
+        LevelClearData levelClearData = new LevelClearData();
+        
+        levelClearData.time = (int)levelTime;
+        levelClearData.mirrorsPlaced = 1;
+        levelClearData.highScore = levelManager.currentLevel.highscore;
+        levelClearData.CalculateScore((int)levelTime, 1);
 
+        levelManager.LevelFinished(levelClearData);
+        //EventManager.Instance?.GameClear((int)levelTime);
     }
 
-    private void LevelChanged(int levelNum)
+    private void LevelChanged(Level newLevel)
     {
-        levelCurrent = levelNum;
         levelEnded = false;
         levelTime = 0;
+
+        levelManager.currentLevel = newLevel;
     }
 
     private void PlayNextLevel()
     {
-        Debug.Log($"Level Current: {levelCurrent}");
-        string nextLevelName = "Level " + (levelCurrent + 1).ToString();
-        EventManager.Instance?.NextLevel(levelCurrent + 1);
+        Debug.Log($"Level Current: {levelManager.currentLevel}");
+        levelManager.NextLevel();
+
+        //EventManager.Instance?.NextLevel(levelCurrent + 1);
     }
 
     private void OnDestroy()

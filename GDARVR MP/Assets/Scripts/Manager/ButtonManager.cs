@@ -8,36 +8,27 @@ public class ButtonManager : MonoBehaviour
 {
     public List<GameObject> LevelButtonList;
 
-    public string levelSceneNameToLoad;
-    public int levelNum;
+    public Level levelToLoad;
     [SerializeField] float buttonAlpha = 0.5f;
     [SerializeField] int unlockedLevels = 1;
-
-
 
     // Start is called before the first frame update
     void Start()
     {
-        EventManager.Instance.OnUnlockLevel += UpdateAvailableLevels;
+        //EventManager.Instance.OnUnlockLevel += UpdateAvailableLevels;
         
-        if(GameManager.Instance != null)
+        /*if(GameManager.Instance != null)
         {
             unlockedLevels = GameManager.Instance.LevelCleared + 1;
         }
         else
         {
             unlockedLevels = 1;
-        }
+        }*/
 
-        EventManager.Instance?.UnlockLevels(unlockedLevels);
-
+        //EventManager.Instance?.UnlockLevels(unlockedLevels);
+        UpdateAvailableButtons();
         Debug.Log("Levels Unlocked:" + unlockedLevels);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void SelectThisLevel()
@@ -48,20 +39,20 @@ public class ButtonManager : MonoBehaviour
             LevelDetails levelDetails = EventSystem.current.currentSelectedGameObject.GetComponent <LevelDetails>();// get level details comp
 
             // updates the level scene name and level number to load
-            levelSceneNameToLoad = levelDetails.level.SceneName; 
-            levelNum = levelDetails.level.levelNumber;
+            levelToLoad = levelDetails.level; 
         }
     }
     public void StartSelectedLevel()
     {
         // loads the selected level
-        Debug.Log("Current Selected Level: " + levelSceneNameToLoad);
+        Debug.Log("Current Selected Level: " + levelToLoad.SceneName);
 
-        SCENE_MANAGER.instance.LoadLevelByNum(levelNum);
-        //EventManager.Instance?.LevelChanged(levelNum);
+        SCENE_MANAGER.Instance?.LoadLevel(levelToLoad);
+        //SCENE_MANAGER.Instance?.LoadLevelByNum(levelNum);
+        
     }
 
-    public void UpdateAvailableLevels(int nUnlockedLevels)
+    /*public void UpdateAvailableLevels(int nUnlockedLevels)
     {
         //Mathf.Clamp(nUnlockedLevels, 1.0f, LevelButtonList.Count);
 
@@ -70,7 +61,7 @@ public class ButtonManager : MonoBehaviour
             LevelButtonList[i].GetComponent<LevelDetails>().level.isLocked = false;
         }
         UpdateAvailableButtons();
-    }
+    }*/
     public void UpdateAvailableButtons()
     {
         for (int i = 0; i < LevelButtonList.Count; i++)
@@ -79,8 +70,6 @@ public class ButtonManager : MonoBehaviour
             Button button = LevelButtonList[i].GetComponentInChildren<Button>();
             Text text = LevelButtonList[i].GetComponentInChildren<Text>();
             Color origColor = text.color;
-
-
 
             if (levelDetails.level.isLocked == true)
             {
@@ -102,7 +91,7 @@ public class ButtonManager : MonoBehaviour
 
     private void OnDestroy()
     {
-       EventManager.Instance.OnUnlockLevel -= UpdateAvailableLevels;
+       //EventManager.Instance.OnUnlockLevel -= UpdateAvailableLevels;
     }
 
 

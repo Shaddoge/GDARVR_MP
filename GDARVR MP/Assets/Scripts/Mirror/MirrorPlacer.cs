@@ -61,7 +61,7 @@ public class MirrorPlacer : MonoBehaviour
         if(mirrors[objIndex].GetComponent<Mirror>().isLocked) return;
 
         mirrors[objIndex].SetActive(true);
-        Debug.Log($"Positions: {position.x}, {position.z}");
+        
         Vector3 gridPos = new Vector3(Mathf.Round(position.x), this.transform.position.y, Mathf.Round(position.z));
         mirrors[objIndex].transform.position = gridPos;
         mirrors[objIndex].transform.localRotation = Quaternion.Euler(0.0f, rotY, 0.0f);

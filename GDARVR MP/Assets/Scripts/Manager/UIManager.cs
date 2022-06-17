@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject gameOverPanelObj;
     [SerializeField] private GameObject[] hud;
 
     void Start()
     {
-        gameOverPanel.SetActive(false);
+        gameOverPanelObj.SetActive(false);
         EventManager.Instance.OnGameClear += GameOverPopUp;
     }
 
-    private void GameOverPopUp()
+    private void GameOverPopUp(LevelClearData levelClearData)
     {
         // Disable HUD
         for (int i = 0; i < hud.Length; i++)
@@ -21,7 +21,10 @@ public class UIManager : MonoBehaviour
             hud[i].SetActive(false);
         }
         // Display Game Over Panel
-        gameOverPanel.SetActive(true);
+        GameOverPanel gameOverPanel = gameOverPanelObj.GetComponent<GameOverPanel>();
+
+        gameOverPanel.LevelCleared(levelClearData);
+        gameOverPanelObj.SetActive(true);
     }
 
     private void OnDestroy()

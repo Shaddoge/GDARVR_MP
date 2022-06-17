@@ -58,6 +58,6 @@ public class LevelMenuPanel : MonoBehaviour
 
     public void OpenMainMenu()
     {
-        SCENE_MANAGER.instance.OpenMainMenu();
+        SCENE_MANAGER.Instance?.OpenMainMenu();
     }
 }

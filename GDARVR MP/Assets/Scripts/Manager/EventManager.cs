@@ -7,30 +7,28 @@ public class EventManager : MonoBehaviour
 {
     private static EventManager instance;
 
-    private bool existing = false;
     public static EventManager Instance { get{ return instance; } }
 
     public event Action<bool> OnPlatformTracked;
     public event Action<int, bool> OnToggleLock;
 
     public event Action OnCrystalCharged;
-    public event Action OnRestart, OnGameClear;
+    public event Action<LevelClearData> OnGameClear;
 
     public event Action OnLevelSelect;
 
     public event Action OnNextLevelClick;
-    public event Action<int> OnNextLevel;
+    public event Action OnNextLevel;
 
-    public event Action<int> OnLevelChanged;
+    public event Action<Level> OnLevelChanged;
 
-    public event Action<int> OnUnlockLevel;
+    //public event Action<int> OnUnlockLevel;
 
     // Start is called before the first frame update
     void Awake()
     {
         if(instance != null)
         {
-            existing = true;
             Destroy(this.gameObject);
             return;
         }
@@ -65,11 +63,11 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public void GameClear()
+    public void GameClear(LevelClearData levelClearData)
     {
         if(OnGameClear != null)
         {
-            OnGameClear();
+            OnGameClear(levelClearData);
         }
     }
 
@@ -81,35 +79,27 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public void NextLevelClick()
-    {
-        if(OnNextLevelClick != null)
-        {
-            OnNextLevelClick();
-        }
-    }
-
-    public void NextLevel(int levelNum)
+    public void NextLevel()
     {
         if(OnNextLevel != null)
         {
-            OnNextLevel(levelNum);
+            OnNextLevel();
         }
     }
 
-    public void LevelChanged(int levelNum)
+    public void LevelChanged(Level newLevel)
     {
         if(OnLevelChanged != null)
         {
-            OnLevelChanged(levelNum);
+            OnLevelChanged(newLevel);
         }
     }
 
-    public void UnlockLevels(int nLevelsUnlocked)
+    /*public void UnlockLevels(int nLevelsUnlocked)
     {
         if (OnUnlockLevel != null)
         {
             OnUnlockLevel(nLevelsUnlocked);
         }
-    }
+    }*/
 }

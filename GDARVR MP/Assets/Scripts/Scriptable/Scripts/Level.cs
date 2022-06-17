@@ -11,6 +11,8 @@ public class Level : ScriptableObject
     public Sprite levelPreview;
     public int levelNumber;
     public bool isLocked = true;
+    public int highscore;
+    public Level nextLevel;
     // Start is called before the first frame update
  
 }

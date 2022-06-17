@@ -7,8 +7,11 @@ public class SCENE_MANAGER : MonoBehaviour
 {
     // Singleton
 
-    public static SCENE_MANAGER instance = null;
+    private static SCENE_MANAGER instance = null;
+    public static SCENE_MANAGER Instance { get{ return instance; } }
+
     private bool existing = false;
+    [SerializeField] private LevelManager levelManager;
 
     private void Start()
     {
@@ -24,7 +27,7 @@ public class SCENE_MANAGER : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
-        EventManager.Instance.OnNextLevel += LoadLevelByNum;
+        EventManager.Instance.OnNextLevel += LoadNextLevel;
         EventManager.Instance.OnLevelSelect += OpenLevelSelect;
     }
 
@@ -38,52 +41,59 @@ public class SCENE_MANAGER : MonoBehaviour
     {
         // start new game
         // locks all levels
-        if (GameManager.Instance.LevelCleared == 0)
+        AudioManager.Instance.PlayButtonSFX();
+        Debug.Log("Current Level: " + levelManager.currentLevel);
+
+        /*if (GameManager.Instance.LevelCleared == 0)
         {
             GameManager.Instance.levelCurrent = 1;
         }
-        Debug.Log("Curent Level: "+ GameManager.Instance.levelCurrent);
-        LoadLevelByNum(GameManager.Instance.levelCurrent);
-        Debug.Log("New Game");
-
+        LoadLevelByNum(GameManager.Instance?.levelCurrent);
+        Debug.Log("New Game");*/
     }
 
     public void OpenLevelSelect()
     {
+        AudioManager.Instance.PlayButtonSFX();
         SceneManager.LoadScene("LevelSelection");
         Debug.Log("Opened Level Selection Menu");
+
     }
 
     public void QuitGame()
     {
+        AudioManager.Instance.PlayButtonSFX();
         Application.Quit();
         Debug.Log("Application Closed");
     }
 
     public void OpenMainMenu()
     {
+        AudioManager.Instance.PlayButtonSFX();
         SceneManager.LoadScene("Mainmenu");
         Debug.Log("Mainmenu");
     }
 
-    public void LoadSelectedLevel(string sceneName)
+    public void LoadLevel(Level selectedLevel)
     {
-        SceneManager.LoadScene(sceneName);
+        AudioManager.Instance.PlayButtonSFX();
+        SceneManager.LoadScene(selectedLevel.SceneName);
+        EventManager.Instance?.LevelChanged(selectedLevel);
     }
 
-    public void LoadLevelByNum(int num)
+    public void LoadNextLevel()
     {
-        Debug.Log("Loading");
-        SceneManager.LoadScene("Level " + num.ToString());
-        EventManager.Instance?.LevelChanged(num);
-        //GameManager.Instance.levelCurrent = num;
+        AudioManager.Instance.PlayButtonSFX();
+        Level levelToLoad = levelManager.currentLevel.nextLevel;
+        SceneManager.LoadScene(levelToLoad.SceneName);
+        EventManager.Instance?.LevelChanged(levelToLoad);
     }
 
     private void OnDestroy()
     {
         if(!existing)
         {
-            EventManager.Instance.OnNextLevel -= LoadLevelByNum;
+            EventManager.Instance.OnNextLevel -= LoadNextLevel;
             EventManager.Instance.OnLevelSelect -= OpenLevelSelect;
         }
     }

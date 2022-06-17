@@ -17,3 +17,5 @@ MonoBehaviour:
   levelPreview: {fileID: 21300000, guid: 647f31307f73f8646840f2b41bb3a8d9, type: 3}
   levelNumber: 1
   isLocked: 0
+  highscore: 20
+  nextLevel: {fileID: 11400000, guid: cec3f3e32b67ffe419e351ab258bb653, type: 2}
