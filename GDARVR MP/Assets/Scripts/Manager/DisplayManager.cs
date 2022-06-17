@@ -51,9 +51,7 @@ public class DisplayManager : MonoBehaviour
 
             levelName.text = levelDetails.level.levelName;
             difficulty.text = (levelDetails.level.levelNumber).ToString() + "%"; // temp
-
+            highscore.text = levelDetails.level.highscore.ToString();
         }
-
-
     }
 }

@@ -18,3 +18,4 @@ MonoBehaviour:
   levelNumber: 3
   isLocked: 1
   highscore: 0
+  nextLevel: {fileID: 11400000, guid: 4156a048060e903418dbee2ed34cee44, type: 2}

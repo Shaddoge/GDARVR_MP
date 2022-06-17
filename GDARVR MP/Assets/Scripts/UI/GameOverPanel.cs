@@ -6,13 +6,9 @@ using UnityEngine.UI;
 public class GameOverPanel : MonoBehaviour
 {
     [SerializeField] private Text timeTakenTxt;
+    [SerializeField] private Text mirrorsPlacedTxt;
     [SerializeField] private Text currentScoreTxt;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Text highScoreTxt;
 
     public void LevelSelect()
     {
@@ -21,18 +17,38 @@ public class GameOverPanel : MonoBehaviour
 
     public void NextLevel()
     {
-        EventManager.Instance?.NextLevelClick();
+        EventManager.Instance?.NextLevel();
     }
 
-    public void SetTimeTaken(float _timeTaken)
+    private void SetTimeTaken(int _timeTaken)
     {
         if(timeTakenTxt != null)
-            timeTakenTxt.text = "YOU TOOK " + _timeTaken.ToString() + " SECONDS TO COMPLETE THIS LEVEL";
+            timeTakenTxt.text = $"Time: {_timeTaken}";
     }
 
-    public void SetCurrentScore(float _currentScore)
+    private void SetMirrorsPlaced(int _mirrorsPlaced)
+    {
+        if(mirrorsPlacedTxt != null)
+            mirrorsPlacedTxt.text = $"Mirrors Placed: {_mirrorsPlaced}";
+    }
+
+    private void SetCurrentScore(int _currentScore)
     {
         if (currentScoreTxt != null)
-            currentScoreTxt.text = "YOU SCORED " + _currentScore.ToString() + "POINTS FOR THIS RUN";
+            currentScoreTxt.text = $"Score: {_currentScore}";
+    }
+
+    private void SetHighScore(int _highScore)
+    {
+        if (highScoreTxt != null)
+            highScoreTxt.text = $"High Score: {_highScore}";
+    }
+
+    public void LevelCleared(LevelClearData levelClearData)
+    {
+        SetTimeTaken(levelClearData.time);
+        SetMirrorsPlaced(levelClearData.mirrorsPlaced);
+        SetCurrentScore(levelClearData.score);
+        SetHighScore(levelClearData.highScore);
     }
 }
