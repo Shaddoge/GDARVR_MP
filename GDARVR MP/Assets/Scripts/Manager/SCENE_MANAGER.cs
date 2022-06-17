@@ -44,6 +44,12 @@ public class SCENE_MANAGER : MonoBehaviour
         AudioManager.Instance.PlayButtonSFX();
         Debug.Log("Current Level: " + levelManager.currentLevel);
 
+        //Level level = levelManager.GetLatestLevel();
+        Level level = levelManager.currentLevel;
+        Debug.Log(level.name);
+        if (level == null) return;
+        LoadLevel(level);
+
         /*if (GameManager.Instance.LevelCleared == 0)
         {
             GameManager.Instance.levelCurrent = 1;
