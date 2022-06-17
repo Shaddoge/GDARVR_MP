@@ -31,25 +31,25 @@ public class LevelData : MonoBehaviour
     public static void SetLevelHighScore(int _level, float _highScore)
     {
         if(levelDataList.ContainsKey(_level))
-            levelDataList[i].UpdateHighScore(_highScore);
+            levelDataList[_level].UpdateHighScore(_highScore);
     }
 
     public static void SetLevelFastestTime(int _level, float _timeCleared)
     {
         if (levelDataList.ContainsKey(_level))
-            levelDataList[i].UpdateFastestTimeCleared(_timeCleared);
+            levelDataList[_level].UpdateFastestTimeCleared(_timeCleared);
     }
 
     public static void SetLevelLeastMirrorsUsed(int _level, int _mirrorsUsed)
     {
         if (levelDataList.ContainsKey(_level))
-            levelDataList[i].UpdateLeastMirrorsUsed(_mirrorsUsed);
+            levelDataList[_level].UpdateLeastMirrorsUsed(_mirrorsUsed);
     }
 
     public static void UpdateLevelData(int _level, float _highScore, float _fastestTimeCleared, int _leastMirrorsUsed)
     {
         if (levelDataList.ContainsKey(_level))
-            levelDataList[i].UpdateLevelData(_highScore, _fastestTimeCleared, _leastMirrorsUsed);
+            levelDataList[_level].UpdateLevelData(_highScore, _fastestTimeCleared, _leastMirrorsUsed);
     }
 
     public static float GetHighScore(int _level)
