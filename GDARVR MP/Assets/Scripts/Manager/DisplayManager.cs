@@ -22,6 +22,9 @@ public class DisplayManager : MonoBehaviour
 
     [SerializeField] Image bg;
     [SerializeField] Image preview;
+    [SerializeField] Text levelName;
+    [SerializeField] Text difficulty;
+    [SerializeField] Text highscore;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +48,10 @@ public class DisplayManager : MonoBehaviour
 
             bg.sprite = levelDetails.level.levelPreview;
             preview.sprite = levelDetails.level.levelPreview;
+
+            levelName.text = levelDetails.level.levelName;
+            difficulty.text = (levelDetails.level.levelNumber).ToString() + "%"; // temp
+
         }
 
 
