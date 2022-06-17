@@ -38,6 +38,7 @@ public class SCENE_MANAGER : MonoBehaviour
     {
         // start new game
         // locks all levels
+        AudioManager.Instance.PlayButtonSFX();
         if (GameManager.Instance.LevelCleared == 0)
         {
             GameManager.Instance.levelCurrent = 1;
@@ -45,34 +46,39 @@ public class SCENE_MANAGER : MonoBehaviour
         Debug.Log("Curent Level: "+ GameManager.Instance.levelCurrent);
         LoadLevelByNum(GameManager.Instance.levelCurrent);
         Debug.Log("New Game");
-
     }
 
     public void OpenLevelSelect()
     {
+        AudioManager.Instance.PlayButtonSFX();
         SceneManager.LoadScene("LevelSelection");
         Debug.Log("Opened Level Selection Menu");
+
     }
 
     public void QuitGame()
     {
+        AudioManager.Instance.PlayButtonSFX();
         Application.Quit();
         Debug.Log("Application Closed");
     }
 
     public void OpenMainMenu()
     {
+        AudioManager.Instance.PlayButtonSFX();
         SceneManager.LoadScene("Mainmenu");
         Debug.Log("Mainmenu");
     }
 
     public void LoadSelectedLevel(string sceneName)
     {
+        AudioManager.Instance.PlayButtonSFX();
         SceneManager.LoadScene(sceneName);
     }
 
     public void LoadLevelByNum(int num)
     {
+        AudioManager.Instance.PlayButtonSFX();
         Debug.Log("Loading");
         SceneManager.LoadScene("Level " + num.ToString());
         EventManager.Instance?.LevelChanged(num);
