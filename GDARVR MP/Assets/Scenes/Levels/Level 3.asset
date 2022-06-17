@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9a630cb52aa0d249a38d999508938aa, type: 3}
   m_Name: Level 3
   m_EditorClassIdentifier: 
-  levelName: First Level
+  levelName: Third Level
   SceneName: Level 3
   levelPreview: {fileID: 21300000, guid: 87398bf15e97c0241b01aa5e90114da7, type: 3}
   levelNumber: 3
   isLocked: 1
+  highscore: 0
