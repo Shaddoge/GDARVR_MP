@@ -3304,7 +3304,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1249087407}
-        m_TargetAssemblyTypeName: SceneManagerScript, Assembly-CSharp
+        m_TargetAssemblyTypeName: SCENE_MANAGER, Assembly-CSharp
         m_MethodName: OpenMainMenu
         m_Mode: 1
         m_Arguments:
