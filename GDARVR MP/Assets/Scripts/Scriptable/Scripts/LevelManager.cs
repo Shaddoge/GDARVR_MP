@@ -38,33 +38,18 @@ public class LevelManager : ScriptableObject
         SCENE_MANAGER.Instance?.LoadLevel(levelToLoad);
     }
 
-    public void StartGame()
+    public Level GetLatestLevel()
     {
-        Level levelToLoad = new Level();
-
         for (int i = 0; i < levelList.Length; i++)
         {
             if (levelList[i].nextLevel)
-            {
                 if (levelList[i].nextLevel.isLocked)
-                {
-                    levelToLoad = levelList[i];
-                    break;
-                }
-            }
+                    return levelList[i];
             else
-            {
-                levelToLoad = levelList[i];
-                break;
-            }
+                return levelList[i];
         }
 
-        SCENE_MANAGER.Instance?.LoadLevel(levelToLoad);
-    }
-
-    public int GetLatestLevelClear()
-    {
-        return 0;
+        return null;
     }
 
     private void OnDisable()
