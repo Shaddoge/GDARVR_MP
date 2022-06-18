@@ -9,6 +9,10 @@ public class LaserBehavior : MonoBehaviour
     [SerializeField] private int maxReflect = 3;
     [SerializeField] private Transform startPoint;
     [SerializeField] private bool reflectOnlyMirror;
+    
+    private int mirrorsHit = 0;
+
+    private int nPrevMirrorHit = 0;
 
     void Start()
     {
@@ -20,12 +24,14 @@ public class LaserBehavior : MonoBehaviour
 
     void Update()
     {
+        nPrevMirrorHit = mirrorsHit; // number of mirror hit before update
         CastLaser(startPoint.position, startPoint.up);
+        OnMirrorHitNumChanged(); // play sfx when mirror hit count is changed
     }
 
     private void CastLaser(Vector3 position, Vector3 direction)
     {
-        int mirrorsHit = 0;
+         mirrorsHit = 0;
         laser.SetPosition(0, startPoint.position);
 
         //hitParticle.SetActive(false);
@@ -72,5 +78,15 @@ public class LaserBehavior : MonoBehaviour
             }
         }
 
+    }
+
+    private void OnMirrorHitNumChanged()
+    {
+        // if changed
+        if (nPrevMirrorHit != mirrorsHit)
+        {
+            AudioManager.Instance.PlayMirrorSFX();
+            Debug.Log("Mirror Count is Changed");
+        }
     }
 }
