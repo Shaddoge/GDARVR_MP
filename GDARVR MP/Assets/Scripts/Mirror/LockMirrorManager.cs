@@ -8,27 +8,32 @@ public class LockMirrorManager : MonoBehaviour
     private static LockMirrorManager instance;
     public static LockMirrorManager Instance { get{ return instance; } }
 
+    private bool existing = false;
+
     [SerializeField] private GameObject lockPanel;
     [SerializeField] private GameObject buttonPrefab;
 
     private List<bool> lockList = new List<bool>();
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (instance != null)
         {
+            existing = true;
             Destroy(this.gameObject);
             return;
         }
         else
         {
             instance = this;
+
+            EventManager.Instance.OnInitializeMirrors += InitializeButtons;
         }
     }
 
     // Only initialize from mirror tracker;
-    public void InitializeButtons(int numMirrors)
+    private void InitializeButtons(int numMirrors)
     {
         for (int i = 0; i < numMirrors; i++)
         {
@@ -62,5 +67,13 @@ public class LockMirrorManager : MonoBehaviour
             button.image.color = new Color32(0, 0, 0, 175);
 
         EventManager.Instance?.ToggleLocked(index, locked);
+    }
+
+    private void OnDestroy()
+    {
+        if(!existing)
+        {
+            EventManager.Instance.OnInitializeMirrors -= InitializeButtons;
+        }
     }
 }
