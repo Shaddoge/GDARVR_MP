@@ -18977,6 +18977,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 47c1319e8241e9e45b6df0b689e5bbe9, type: 3}
     - target: {fileID: 5848589784048867871, guid: 2d89b86feafdd0942a0b5c2024d463b0, type: 3}
+      propertyPath: lockSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 088c09282f7e5bd4bb83ba1d14568b69, type: 3}
+    - target: {fileID: 5848589784048867871, guid: 2d89b86feafdd0942a0b5c2024d463b0, type: 3}
       propertyPath: mirrorSFX
       value: 
       objectReference: {fileID: 8300000, guid: 99befd88f8da612409f397ba062ddbbd, type: 3}
