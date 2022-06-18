@@ -41,8 +41,7 @@ public class MirrorTracker : MonoBehaviour
             }
         }
 
-        MirrorPlacer.Instance?.AddMirrors(mirrorTargets.Count);
-        LockMirrorManager.Instance?.InitializeButtons(mirrorTargets.Count);
+        EventManager.Instance?.InitializeMirrors(mirrorTargets.Count);
     }
 
     private void Update()

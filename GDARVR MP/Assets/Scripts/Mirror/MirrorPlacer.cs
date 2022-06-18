@@ -13,7 +13,7 @@ public class MirrorPlacer : MonoBehaviour
     
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (instance != null)
         {
@@ -31,6 +31,7 @@ public class MirrorPlacer : MonoBehaviour
                 }
             }*/
             
+            EventManager.Instance.OnInitializeMirrors += AddMirrors;
             EventManager.Instance.OnToggleLock += LockMirror;
             EventManager.Instance.OnResetMirrors += ResetMirrors;
             instance = this;
@@ -72,7 +73,7 @@ public class MirrorPlacer : MonoBehaviour
         mirrors[objIndex].transform.localRotation = Quaternion.Euler(0.0f, rotY, 0.0f);
     }
 
-    public void AddMirrors(int num)
+    private void AddMirrors(int num)
     {
         for (int i = 0; i < num; i++)
         {
@@ -103,6 +104,9 @@ public class MirrorPlacer : MonoBehaviour
     {
         if (!existing)
         {
+            EventManager.Instance.OnInitializeMirrors -= AddMirrors;
+            EventManager.Instance.OnToggleLock -= LockMirror;
+            EventManager.Instance.OnResetMirrors -= ResetMirrors;
             instance = null;
         }
     }

@@ -10,6 +10,7 @@ public class EventManager : MonoBehaviour
     public static EventManager Instance { get{ return instance; } }
 
     public event Action<bool> OnPlatformDetected;
+    public event Action<int> OnInitializeMirrors;
     public event Action<int, bool> OnToggleLock;
     public event Action OnResetMirrors;
 
@@ -40,6 +41,14 @@ public class EventManager : MonoBehaviour
         if(OnPlatformDetected != null)
         {
             OnPlatformDetected(isDetected);
+        }
+    }
+
+    public void InitializeMirrors(int nMirrors)
+    {
+        if(OnInitializeMirrors != null)
+        {
+            OnInitializeMirrors(nMirrors);
         }
     }
 

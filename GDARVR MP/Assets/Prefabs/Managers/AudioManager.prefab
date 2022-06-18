@@ -52,7 +52,7 @@ MonoBehaviour:
   gameBGM: {fileID: 8300000, guid: 47c1319e8241e9e45b6df0b689e5bbe9, type: 3}
   buttonSFX: {fileID: 8300000, guid: 6a0a8598134c4084b93fbcf2cb1d3b07, type: 3}
   buttonSFX2: {fileID: 8300000, guid: 23775a20c00146d4eb753d0b91a8d694, type: 3}
-  lockSFX: {fileID: 0}
+  lockSFX: {fileID: 8300000, guid: 088c09282f7e5bd4bb83ba1d14568b69, type: 3}
   mirrorSFX: {fileID: 8300000, guid: 23775a20c00146d4eb753d0b91a8d694, type: 3}
   crysAscSFX: {fileID: 8300000, guid: f61e415b6c845054fbd8f198a093f447, type: 3}
   crysDesSFX: {fileID: 8300000, guid: 3e51bc8d315ab3947ab3fb044868acb1, type: 3}
