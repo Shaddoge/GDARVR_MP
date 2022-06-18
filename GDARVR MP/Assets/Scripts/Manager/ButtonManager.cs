@@ -9,8 +9,9 @@ public class ButtonManager : MonoBehaviour
     public List<GameObject> LevelButtonList;
 
     public Level levelToLoad;
-    [SerializeField] float buttonAlpha = 0.5f;
-    [SerializeField] int unlockedLevels = 1;
+    [SerializeField] private Button startButton;
+    [SerializeField] private float buttonAlpha = 0.5f;
+    [SerializeField] private int unlockedLevels = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,11 @@ public class ButtonManager : MonoBehaviour
         // retrieves the level details of the selected level
         if (EventSystem.current.currentSelectedGameObject.CompareTag("LevelButton") == true)
         {
+            if(!startButton.IsInteractable())
+            {
+                startButton.interactable = true;
+            }
+            AudioManager.Instance.PlayLvlSelectSFX();
             LevelDetails levelDetails = EventSystem.current.currentSelectedGameObject.GetComponent <LevelDetails>();// get level details comp
 
             // updates the level scene name and level number to load
@@ -47,6 +53,7 @@ public class ButtonManager : MonoBehaviour
         // loads the selected level
         Debug.Log("Current Selected Level: " + levelToLoad.SceneName);
 
+        AudioManager.Instance.PlayButtonSFX();
         SCENE_MANAGER.Instance?.LoadLevel(levelToLoad);
         //SCENE_MANAGER.Instance?.LoadLevelByNum(levelNum);
         
@@ -89,14 +96,13 @@ public class ButtonManager : MonoBehaviour
         }
     }
 
+    public void BackToMainMenu()
+    {
+        SCENE_MANAGER.Instance?.OpenMainMenu();
+    }
+
     private void OnDestroy()
     {
        //EventManager.Instance.OnUnlockLevel -= UpdateAvailableLevels;
     }
-
-
-
-
-
-
 }

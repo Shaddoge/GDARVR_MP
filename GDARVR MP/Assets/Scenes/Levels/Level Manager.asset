@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9758f7600efab1d44b428f6e75c2cb3a, type: 3}
   m_Name: Level Manager
   m_EditorClassIdentifier: 
-  currentLevel: {fileID: 0}
+  currentLevel: {fileID: 11400000, guid: 3a67b97504b43964d9bb0d89a4a8f5a1, type: 2}
   levelList:
   - {fileID: 11400000, guid: 3a67b97504b43964d9bb0d89a4a8f5a1, type: 2}
   - {fileID: 11400000, guid: cec3f3e32b67ffe419e351ab258bb653, type: 2}

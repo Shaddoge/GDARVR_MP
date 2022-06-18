@@ -7,7 +7,6 @@ public class LevelManager : ScriptableObject
 {
     public Level currentLevel;
     public Level[] levelList;
-    private Level latestLevelClear;
 
     private void OnEnable()
     {
@@ -52,6 +51,23 @@ public class LevelManager : ScriptableObject
         return null;
     }
 
+    public void ResetLevelData()
+    {
+        for (int i = 0; i < levelList.Length; i++)
+        {
+            Level level = levelList[i];
+            level.highscore = 0;
+
+            if(i > 0)
+            {
+                level.isLocked = true;
+            }
+            else
+            {
+                currentLevel = level;
+            }
+        }
+    }
     private void OnDisable()
     {
         Debug.Log("Level Manager Disabled");

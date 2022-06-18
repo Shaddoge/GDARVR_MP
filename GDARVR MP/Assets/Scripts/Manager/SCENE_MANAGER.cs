@@ -10,14 +10,12 @@ public class SCENE_MANAGER : MonoBehaviour
     private static SCENE_MANAGER instance = null;
     public static SCENE_MANAGER Instance { get{ return instance; } }
 
-    private bool existing = false;
     [SerializeField] private LevelManager levelManager;
 
     private void Start()
     {
         if (instance != null)
         {
-            existing = true;
             Debug.Log("Destroying");
             Destroy(this.gameObject);
             return;
@@ -27,14 +25,6 @@ public class SCENE_MANAGER : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
-        EventManager.Instance.OnNextLevel += LoadNextLevel;
-        EventManager.Instance.OnLevelSelect += OpenLevelSelect;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void OpenNewGame()
@@ -97,10 +87,5 @@ public class SCENE_MANAGER : MonoBehaviour
 
     private void OnDestroy()
     {
-        if(!existing)
-        {
-            EventManager.Instance.OnNextLevel -= LoadNextLevel;
-            EventManager.Instance.OnLevelSelect -= OpenLevelSelect;
-        }
     }
 }

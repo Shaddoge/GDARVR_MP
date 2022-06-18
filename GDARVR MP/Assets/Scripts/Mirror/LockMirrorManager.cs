@@ -5,20 +5,36 @@ using UnityEngine.UI;
 
 public class LockMirrorManager : MonoBehaviour
 {
+    private static LockMirrorManager instance;
+    public static LockMirrorManager Instance { get{ return instance; } }
+
+    [SerializeField] private GameObject lockPanel;
     [SerializeField] private GameObject buttonPrefab;
-    private int numMirrors = 0;
+
     private List<bool> lockList = new List<bool>();
+
     // Start is called before the first frame update
     void Start()
     {
-        GameObject mirrorPlane = GameObject.FindObjectOfType<MirrorPlacer>().gameObject;
-        numMirrors = mirrorPlane.transform.childCount;
+        if (instance != null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
+    // Only initialize from mirror tracker;
+    public void InitializeButtons(int numMirrors)
+    {
         for (int i = 0; i < numMirrors; i++)
         {
             int index = i;
             lockList.Add(false);
-            GameObject newButtonObj = GameObject.Instantiate(buttonPrefab, this.transform);
+            GameObject newButtonObj = GameObject.Instantiate(buttonPrefab);
             newButtonObj.GetComponentInChildren<Text>().text = (i + 1).ToString();
 
             Button button = newButtonObj.GetComponent<Button>();
@@ -26,11 +42,14 @@ public class LockMirrorManager : MonoBehaviour
             button.onClick.AddListener(delegate{
                 ToggleLock(button, index);
                 });
+
+            newButtonObj.transform.parent = lockPanel.transform;
         }
     }
 
     private void ToggleLock(Button button, int index)
     {
+        AudioManager.Instance.PlayLockSFX();
         Debug.Log(index);
 
         lockList[index] = !lockList[index];

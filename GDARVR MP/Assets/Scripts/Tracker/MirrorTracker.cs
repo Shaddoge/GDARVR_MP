@@ -5,8 +5,10 @@ using Vuforia;
 
 public class MirrorTracker : MonoBehaviour
 {
-    [SerializeField] private List<ObserverBehaviour> mirrorTargets = new List<ObserverBehaviour>();
+    public List<ObserverBehaviour> mirrorTargets = new List<ObserverBehaviour>();
+    
     private List<bool> isTracked = new List<bool>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,9 @@ public class MirrorTracker : MonoBehaviour
                 mirrorTarget.OnTargetStatusChanged += OnTargetStatusChanged;
             }
         }
+
+        MirrorPlacer.Instance?.AddMirrors(mirrorTargets.Count);
+        LockMirrorManager.Instance?.InitializeButtons(mirrorTargets.Count);
     }
 
     private void Update()

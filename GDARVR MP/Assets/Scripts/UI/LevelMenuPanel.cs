@@ -53,7 +53,7 @@ public class LevelMenuPanel : MonoBehaviour
 
     public void OpenLevelSelect()
     {
-        EventManager.Instance?.LevelSelect();
+        SCENE_MANAGER.Instance?.OpenLevelSelect();
     }
 
     public void OpenMainMenu()

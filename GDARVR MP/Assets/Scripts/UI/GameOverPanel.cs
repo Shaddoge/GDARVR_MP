@@ -12,12 +12,12 @@ public class GameOverPanel : MonoBehaviour
 
     public void LevelSelect()
     {
-        EventManager.Instance?.LevelSelect();
+        SCENE_MANAGER.Instance?.OpenLevelSelect();
     }
 
     public void NextLevel()
     {
-        EventManager.Instance?.NextLevel();
+        SCENE_MANAGER.Instance?.LoadNextLevel();
     }
 
     private void SetTimeTaken(int _timeTaken)
@@ -47,7 +47,7 @@ public class GameOverPanel : MonoBehaviour
     public void LevelCleared(LevelClearData levelClearData)
     {
         SetTimeTaken(levelClearData.time);
-        SetMirrorsPlaced(levelClearData.mirrorsPlaced);
+        SetMirrorsPlaced(levelClearData.mirrorsUsed);
         SetCurrentScore(levelClearData.score);
         SetHighScore(levelClearData.highScore);
     }
