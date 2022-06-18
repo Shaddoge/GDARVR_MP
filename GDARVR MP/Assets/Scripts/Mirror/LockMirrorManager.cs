@@ -5,15 +5,30 @@ using UnityEngine.UI;
 
 public class LockMirrorManager : MonoBehaviour
 {
+    private static LockMirrorManager instance;
+    public static LockMirrorManager Instance { get{ return instance; } }
+
     [SerializeField] private GameObject buttonPrefab;
-    private int numMirrors = 0;
+
     private List<bool> lockList = new List<bool>();
+
     // Start is called before the first frame update
     void Start()
     {
-        GameObject mirrorPlane = GameObject.FindObjectOfType<MirrorPlacer>().gameObject;
-        numMirrors = mirrorPlane.transform.childCount;
+        if (instance != null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
+    // Only initialize from mirror tracker;
+    public void InitializeButtons(int numMirrors)
+    {
         for (int i = 0; i < numMirrors; i++)
         {
             int index = i;

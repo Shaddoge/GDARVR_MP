@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LevelManager levelManager;
 
     private float levelTime = 0f;
+    [HideInInspector] public int mirrorsUsed = 0;
+
     private bool levelEnded = false;
 
     //public int LevelCurrent { get{ return levelCurrent; } }
@@ -71,7 +73,7 @@ public class GameManager : MonoBehaviour
         LevelClearData levelClearData = new LevelClearData();
         
         levelClearData.time = (int)levelTime;
-        levelClearData.mirrorsPlaced = 1;
+        levelClearData.mirrorsPlaced = mirrorsUsed;
         levelClearData.highScore = levelManager.currentLevel.highscore;
         levelClearData.CalculateScore((int)levelTime, 1);
 
@@ -93,6 +95,12 @@ public class GameManager : MonoBehaviour
         levelManager.NextLevel();
 
         //EventManager.Instance?.NextLevel(levelCurrent + 1);
+    }
+
+    public void UpdateMirrorsUsed(int num)
+    {
+        if (levelEnded) return;
+        mirrorsUsed = num;
     }
 
     private void OnDestroy()

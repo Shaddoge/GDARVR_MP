@@ -504,6 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d8d08e19b71be4468fc0c6e68f8ddef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mirrorPrefab: {fileID: 8174087231354771116, guid: 4a77e393b13a3b8429c114e64d015641, type: 3}
 --- !u!1001 &31170969693799382
 PrefabInstance:
   m_ObjectHideFlags: 0

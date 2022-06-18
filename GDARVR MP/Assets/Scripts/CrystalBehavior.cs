@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class CrystalBehavior : MonoBehaviour
 {
-    [SerializeField] private float heatTimeGoal = 10f;
-    private float heatedTime = 0f;
+    [SerializeField] private float chargeTimeGoal = 10f;
+    private float chargedTime = 0f;
     private float timeNotCharged;
     private bool charging;
     private Animator animator;
+
+    [Header("Particles")]
+    [SerializeField] private ParticleSystem chargeParticle;
+    [SerializeField] private ParticleSystem burstParticle;
+    [SerializeField] private ParticleSystem shockwave;
 
     private void Start()
     {
@@ -17,23 +22,26 @@ public class CrystalBehavior : MonoBehaviour
 
     private void Update()
     {
-        if(charging)
+        if (chargeTimeGoal < chargedTime) return;
+        if (charging)
             timeNotCharged += Time.deltaTime;
 
-        if(animator.GetBool("Charging") && timeNotCharged >= 1.0f)
+        if (animator.GetBool("Charging") && timeNotCharged >= 0.25f)
         {
             animator.SetBool("Charging", false);
             // play not discharge
             AudioManager.Instance.PlayDesSFX();
+            chargeParticle.Stop();
             timeNotCharged = 0f;
+            charging = false;
         }
     }
 
     public void HeatUp()
     {
-        if(heatedTime >= heatTimeGoal) return;
+        if (chargedTime >= chargeTimeGoal) return;
         
-        if(!animator.GetBool("Charging"))
+        if (!animator.GetBool("Charging"))
         {
             animator.SetBool("Charging", true);
             // play crystal build up sfx
@@ -42,12 +50,24 @@ public class CrystalBehavior : MonoBehaviour
         }
 
         if (!charging)
+        {
             charging = true;
+            Debug.Log("Play!");
+            chargeParticle.Play();
+        }
+            
+        Debug.Log($"Heating: {chargedTime.ToString("F2")}");
+        chargedTime += Time.deltaTime;
 
-        Debug.Log($"Heating: {heatedTime.ToString("F2")}");
-        heatedTime += Time.deltaTime;
+        if (MenuHUD.Instance)
+        {
+            int chargePercent = (int)((chargedTime / chargeTimeGoal) * 100);
+            MenuHUD.Instance.UpdateChargePercent(chargePercent);
+        }
+
         timeNotCharged = 0;
-        if(heatedTime >= heatTimeGoal)
+
+        if (chargedTime >= chargeTimeGoal)
         {
             FullyCharged();
         }
@@ -56,9 +76,11 @@ public class CrystalBehavior : MonoBehaviour
     private void FullyCharged()
     {
         // Play Animation here!
-        Debug.Log("ANIMATION CHARGED PLAY");
+        
+        burstParticle.Play();
+        shockwave.Play();
         animator.SetTrigger("FullCharged");
-        //insert sfx play
+        // Insert sfx play
         AudioManager.Instance.PlayChargedSFX();
         EventManager.Instance?.CrystalCharged();
     }

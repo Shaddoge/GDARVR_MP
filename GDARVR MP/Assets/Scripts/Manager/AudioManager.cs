@@ -87,21 +87,21 @@ public class AudioManager : MonoBehaviour
     public void PlayChargingSFX()
     {
         CutSFX();
-        gameSFXSource.PlayOneShot(crysAscSFX);
+        gameSFXSource.PlayOneShot(crysAscSFX, 0.25f);
         Debug.Log("play charge sfx");
 
     }
     public void PlayDesSFX()
     {
         CutSFX();
-        gameSFXSource.PlayOneShot(crysDesSFX);
+        gameSFXSource.PlayOneShot(crysDesSFX, 0.5f);
         Debug.Log("play descend sfx");
 
     }
     public void PlayChargedSFX()
     {
         CutSFX();
-        gameSFXSource.PlayOneShot(crysFullSFX);
+        gameSFXSource.PlayOneShot(crysFullSFX, 0.5f);
         Debug.Log("play fully charged sfx");
 
     }
