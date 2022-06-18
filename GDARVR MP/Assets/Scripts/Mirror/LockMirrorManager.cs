@@ -31,6 +31,7 @@ public class LockMirrorManager : MonoBehaviour
 
     private void ToggleLock(Button button, int index)
     {
+        AudioManager.Instance.PlayLockSFX();
         Debug.Log(index);
 
         lockList[index] = !lockList[index];

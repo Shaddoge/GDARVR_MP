@@ -10,12 +10,22 @@ public class AudioManager : MonoBehaviour
 
 
     [SerializeField] private AudioSource musicSource;
-    [SerializeField] private AudioSource uiSfxSource;
+    [SerializeField] private AudioSource uiSFXSource;
     [SerializeField] private AudioSource gameSFXSource;
 
     [SerializeField] private AudioClip gameBGM;
     [SerializeField] private AudioClip buttonSFX;
+    [SerializeField] private AudioClip buttonSFX2;
+    [SerializeField] private AudioClip lockSFX;
+
+
+
+
     [SerializeField] private AudioClip mirrorSFX;
+    [SerializeField] private AudioClip crysAscSFX;
+    [SerializeField] private AudioClip crysDesSFX;
+    [SerializeField] private AudioClip crysFullSFX;
+
 
 
     // Start is called before the first frame update
@@ -32,6 +42,8 @@ public class AudioManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
+
+        AudioManager.instance.PlayMainBGM();
     }
 
     // Update is called once per frame
@@ -53,14 +65,15 @@ public class AudioManager : MonoBehaviour
         musicSource.PlayOneShot(gameBGM);
     }
 
-    public void PlaySound(AudioClip clip)
+    public void PlayLvlSelectSFX()
     {
-        //uisfxSource.PlayOneShot(clip);
+        Debug.Log("Play level sfx");
+        uiSFXSource.PlayOneShot(buttonSFX2);
     }
 
     public void PlayButtonSFX()
     {
-        uiSfxSource.PlayOneShot(buttonSFX);
+        uiSFXSource.PlayOneShot(buttonSFX);
         Debug.Log("play button sfx");
 
     }
@@ -70,6 +83,40 @@ public class AudioManager : MonoBehaviour
         gameSFXSource.PlayOneShot(mirrorSFX);
         Debug.Log("play mirror sfx");
 
+    }
+    public void PlayChargingSFX()
+    {
+        CutSFX();
+        gameSFXSource.PlayOneShot(crysAscSFX);
+        Debug.Log("play charge sfx");
+
+    }
+    public void PlayDesSFX()
+    {
+        CutSFX();
+        gameSFXSource.PlayOneShot(crysDesSFX);
+        Debug.Log("play descend sfx");
+
+    }
+    public void PlayChargedSFX()
+    {
+        CutSFX();
+        gameSFXSource.PlayOneShot(crysFullSFX);
+        Debug.Log("play fully charged sfx");
+
+    }
+
+    public void PlayLockSFX()
+    {
+        uiSFXSource.PlayOneShot(lockSFX);
+    }
+
+    public void CutSFX()
+    {
+        if (gameSFXSource.isPlaying)
+        {
+            gameSFXSource.Stop();
+        }
     }
 
 }

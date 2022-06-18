@@ -36,6 +36,7 @@ public class ButtonManager : MonoBehaviour
         // retrieves the level details of the selected level
         if (EventSystem.current.currentSelectedGameObject.CompareTag("LevelButton") == true)
         {
+            AudioManager.Instance.PlayLvlSelectSFX();
             LevelDetails levelDetails = EventSystem.current.currentSelectedGameObject.GetComponent <LevelDetails>();// get level details comp
 
             // updates the level scene name and level number to load
@@ -47,6 +48,7 @@ public class ButtonManager : MonoBehaviour
         // loads the selected level
         Debug.Log("Current Selected Level: " + levelToLoad.SceneName);
 
+        AudioManager.Instance.PlayButtonSFX();
         SCENE_MANAGER.Instance?.LoadLevel(levelToLoad);
         //SCENE_MANAGER.Instance?.LoadLevelByNum(levelNum);
         

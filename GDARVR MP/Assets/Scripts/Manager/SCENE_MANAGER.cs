@@ -25,7 +25,7 @@ public class SCENE_MANAGER : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
+//DontDestroyOnLoad(this.gameObject);
         }
         EventManager.Instance.OnNextLevel += LoadNextLevel;
         EventManager.Instance.OnLevelSelect += OpenLevelSelect;

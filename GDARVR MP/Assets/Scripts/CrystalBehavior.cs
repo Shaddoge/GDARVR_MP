@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CrystalBehavior : MonoBehaviour
 {
-    [SerializeField] private float heatTimeGoal = 3f;
+    [SerializeField] private float heatTimeGoal = 10f;
     private float heatedTime = 0f;
     private float timeNotCharged;
     private bool charging;
@@ -23,6 +23,8 @@ public class CrystalBehavior : MonoBehaviour
         if(animator.GetBool("Charging") && timeNotCharged >= 1.0f)
         {
             animator.SetBool("Charging", false);
+            // play not discharge
+            AudioManager.Instance.PlayDesSFX();
             timeNotCharged = 0f;
         }
     }
@@ -32,9 +34,14 @@ public class CrystalBehavior : MonoBehaviour
         if(heatedTime >= heatTimeGoal) return;
         
         if(!animator.GetBool("Charging"))
+        {
             animator.SetBool("Charging", true);
+            // play crystal build up sfx
+            AudioManager.Instance.PlayChargingSFX();
+            Debug.Log("Should play build up sfx");
+        }
 
-        if(!charging)
+        if (!charging)
             charging = true;
 
         Debug.Log($"Heating: {heatedTime.ToString("F2")}");
@@ -51,6 +58,8 @@ public class CrystalBehavior : MonoBehaviour
         // Play Animation here!
         Debug.Log("ANIMATION CHARGED PLAY");
         animator.SetTrigger("FullCharged");
+        //insert sfx play
+        AudioManager.Instance.PlayChargedSFX();
         EventManager.Instance?.CrystalCharged();
     }
 }
