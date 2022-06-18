@@ -32,6 +32,7 @@ public class MirrorPlacer : MonoBehaviour
             }*/
             
             EventManager.Instance.OnToggleLock += LockMirror;
+            EventManager.Instance.OnResetMirrors += ResetMirrors;
             instance = this;
         }
     }
@@ -87,6 +88,15 @@ public class MirrorPlacer : MonoBehaviour
             mirrors[index].GetComponent<Mirror>().isLocked = locked;
         else
             Debug.Log("Mirror object does not exist!");
+    }
+
+    private void ResetMirrors()
+    {
+        foreach(GameObject mirror in mirrors)
+        {
+            mirror.SetActive(false);
+            mirror.transform.position = Vector3.zero;
+        }
     }
 
     private void OnDestroy()

@@ -9,16 +9,12 @@ public class EventManager : MonoBehaviour
 
     public static EventManager Instance { get{ return instance; } }
 
-    public event Action<bool> OnPlatformTracked;
+    public event Action<bool> OnPlatformDetected;
     public event Action<int, bool> OnToggleLock;
+    public event Action OnResetMirrors;
 
     public event Action OnCrystalCharged;
     public event Action<LevelClearData> OnGameClear;
-
-    public event Action OnLevelSelect;
-
-    public event Action OnNextLevelClick;
-    public event Action OnNextLevel;
 
     public event Action<Level> OnLevelChanged;
 
@@ -39,11 +35,11 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public void PlatformTracked(bool isTracked)
+    public void PlatformDetected(bool isDetected)
     {
-        if(OnPlatformTracked != null)
+        if(OnPlatformDetected != null)
         {
-            OnPlatformTracked(isTracked);
+            OnPlatformDetected(isDetected);
         }
     }
 
@@ -52,6 +48,14 @@ public class EventManager : MonoBehaviour
         if(OnToggleLock != null)
         {
             OnToggleLock(index, locked);
+        }
+    }
+
+    public void ResetMirrors()
+    {
+        if(OnResetMirrors != null)
+        {
+            OnResetMirrors();
         }
     }
 
@@ -71,22 +75,6 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public void LevelSelect()
-    {
-        if(OnLevelSelect != null)
-        {
-            OnLevelSelect();
-        }
-    }
-
-    public void NextLevel()
-    {
-        if(OnNextLevel != null)
-        {
-            OnNextLevel();
-        }
-    }
-
     public void LevelChanged(Level newLevel)
     {
         if(OnLevelChanged != null)
@@ -94,12 +82,4 @@ public class EventManager : MonoBehaviour
             OnLevelChanged(newLevel);
         }
     }
-
-    /*public void UnlockLevels(int nLevelsUnlocked)
-    {
-        if (OnUnlockLevel != null)
-        {
-            OnUnlockLevel(nLevelsUnlocked);
-        }
-    }*/
 }

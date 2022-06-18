@@ -8,6 +8,7 @@ public class LockMirrorManager : MonoBehaviour
     private static LockMirrorManager instance;
     public static LockMirrorManager Instance { get{ return instance; } }
 
+    [SerializeField] private GameObject lockPanel;
     [SerializeField] private GameObject buttonPrefab;
 
     private List<bool> lockList = new List<bool>();
@@ -33,7 +34,7 @@ public class LockMirrorManager : MonoBehaviour
         {
             int index = i;
             lockList.Add(false);
-            GameObject newButtonObj = GameObject.Instantiate(buttonPrefab, this.transform);
+            GameObject newButtonObj = GameObject.Instantiate(buttonPrefab);
             newButtonObj.GetComponentInChildren<Text>().text = (i + 1).ToString();
 
             Button button = newButtonObj.GetComponent<Button>();
@@ -41,6 +42,8 @@ public class LockMirrorManager : MonoBehaviour
             button.onClick.AddListener(delegate{
                 ToggleLock(button, index);
                 });
+
+            newButtonObj.transform.parent = lockPanel.transform;
         }
     }
 

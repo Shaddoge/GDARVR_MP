@@ -70,8 +70,13 @@ public class MenuHUD : MonoBehaviour
         VuforiaBehaviour.Instance.CameraDevice.SetFocusMode(FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
     }
 
+    public void ResetMirrors()
+    {
+        EventManager.Instance?.ResetMirrors();
+    }
+
     public void LevelSelect()
     {
-        EventManager.Instance?.LevelSelect();
+        SCENE_MANAGER.Instance?.OpenLevelSelect();
     }
 }
