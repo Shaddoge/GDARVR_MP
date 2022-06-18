@@ -10,9 +10,13 @@ public class AudioManager : MonoBehaviour
 
 
     [SerializeField] private AudioSource musicSource;
-    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioSource uiSfxSource;
+    [SerializeField] private AudioSource gameSFXSource;
 
+    [SerializeField] private AudioClip gameBGM;
     [SerializeField] private AudioClip buttonSFX;
+    [SerializeField] private AudioClip mirrorSFX;
+
 
     // Start is called before the first frame update
     void Start()
@@ -44,15 +48,27 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void PlayMainBGM()
+    {
+        musicSource.PlayOneShot(gameBGM);
+    }
+
     public void PlaySound(AudioClip clip)
     {
-        sfxSource.PlayOneShot(clip);
+        //uisfxSource.PlayOneShot(clip);
     }
 
     public void PlayButtonSFX()
     {
-        sfxSource.PlayOneShot(buttonSFX);
+        uiSfxSource.PlayOneShot(buttonSFX);
         Debug.Log("play button sfx");
+
+    }
+
+    public void PlayMirrorSFX()
+    {
+        gameSFXSource.PlayOneShot(mirrorSFX);
+        Debug.Log("play mirror sfx");
 
     }
 

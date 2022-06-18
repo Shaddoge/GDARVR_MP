@@ -2543,6 +2543,16 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!82 &269513555 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 78336840164026834, guid: 2d89b86feafdd0942a0b5c2024d463b0, type: 3}
+  m_PrefabInstance: {fileID: 5848589782869724316}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &269513556 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5848589784048867864, guid: 2d89b86feafdd0942a0b5c2024d463b0, type: 3}
+  m_PrefabInstance: {fileID: 5848589782869724316}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &291050506
 Mesh:
   m_ObjectHideFlags: 0
@@ -18890,6 +18900,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 78336840164026834, guid: 2d89b86feafdd0942a0b5c2024d463b0, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848589784048867865, guid: 2d89b86feafdd0942a0b5c2024d463b0, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5848589784048867869, guid: 2d89b86feafdd0942a0b5c2024d463b0, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -18938,5 +18956,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5848589784048867871, guid: 2d89b86feafdd0942a0b5c2024d463b0, type: 3}
+      propertyPath: gameBGM
+      value: 
+      objectReference: {fileID: 8300000, guid: 47c1319e8241e9e45b6df0b689e5bbe9, type: 3}
+    - target: {fileID: 5848589784048867871, guid: 2d89b86feafdd0942a0b5c2024d463b0, type: 3}
+      propertyPath: mirrorSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 99befd88f8da612409f397ba062ddbbd, type: 3}
+    - target: {fileID: 5848589784048867871, guid: 2d89b86feafdd0942a0b5c2024d463b0, type: 3}
+      propertyPath: uiSfxSource
+      value: 
+      objectReference: {fileID: 269513556}
+    - target: {fileID: 5848589784048867871, guid: 2d89b86feafdd0942a0b5c2024d463b0, type: 3}
+      propertyPath: gameSFXSource
+      value: 
+      objectReference: {fileID: 269513555}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d89b86feafdd0942a0b5c2024d463b0, type: 3}
