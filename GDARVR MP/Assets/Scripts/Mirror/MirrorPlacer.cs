@@ -13,7 +13,7 @@ public class MirrorPlacer : MonoBehaviour
     
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         if (instance != null)
         {
@@ -58,6 +58,7 @@ public class MirrorPlacer : MonoBehaviour
             // Spawn mirror here
             PlaceMirror(hitPoint, rotY, objIndex);
         }
+        Debug.Log("Raycasting");
     }
 
     public void PlaceMirror(Vector3 position, float rotY, int objIndex)
@@ -96,6 +97,7 @@ public class MirrorPlacer : MonoBehaviour
         foreach(GameObject mirror in mirrors)
         {
             mirror.SetActive(false);
+            mirror.GetComponentInChildren<Mirror>().isLocked = false;
             mirror.transform.position = Vector3.zero;
         }
     }

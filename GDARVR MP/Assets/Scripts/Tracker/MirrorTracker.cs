@@ -41,6 +41,13 @@ public class MirrorTracker : MonoBehaviour
             }
         }
 
+        StartCoroutine(Initialize());
+    }
+
+    private IEnumerator Initialize()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("Initialized");
         EventManager.Instance?.InitializeMirrors(mirrorTargets.Count);
     }
 
@@ -103,7 +110,7 @@ public class MirrorTracker : MonoBehaviour
 
         for(int i = 0; i < mirrorTargets.Count; i++)
         {
-            if(mirrorTargets[i] == target)
+            if(GameObject.ReferenceEquals(mirrorTargets[i].gameObject, target))
             {
                 objFound = true;
                 index = i;
