@@ -9,8 +9,8 @@ public class StatusManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (EventManager.Instance != null)
-            EventManager.Instance.OnPlatformDetected += ToggleStatus;
+        
+        EventManager.Instance.OnPlatformDetected += ToggleStatus;
     }
 
     private void ToggleStatus(bool isDetected)
@@ -20,7 +20,6 @@ public class StatusManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (EventManager.Instance != null)
-            EventManager.Instance.OnPlatformDetected -= ToggleStatus;
+        EventManager.Instance.OnPlatformDetected -= ToggleStatus;
     }
 }

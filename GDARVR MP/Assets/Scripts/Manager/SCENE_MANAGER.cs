@@ -66,7 +66,7 @@ public class SCENE_MANAGER : MonoBehaviour
     public void OpenMainMenu()
     {
         AudioManager.Instance.PlayButtonSFX();
-        SceneManager.LoadScene("Mainmenu");
+        SceneManager.LoadScene("MainMenu");
         Debug.Log("Mainmenu");
     }
 
@@ -83,9 +83,5 @@ public class SCENE_MANAGER : MonoBehaviour
         Level levelToLoad = levelManager.currentLevel.nextLevel;
         SceneManager.LoadScene(levelToLoad.SceneName);
         EventManager.Instance?.LevelChanged(levelToLoad);
-    }
-
-    private void OnDestroy()
-    {
     }
 }

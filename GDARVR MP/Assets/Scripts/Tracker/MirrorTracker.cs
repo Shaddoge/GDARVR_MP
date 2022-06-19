@@ -98,7 +98,7 @@ public class MirrorTracker : MonoBehaviour
         if(!objFound) return;
         
         Vector3 pos = TranslationTargetPosToScreenSpace(index);
-        float rotY = Mathf.Round(mirrorTargets[index].gameObject.transform.rotation.eulerAngles.y / 30) * 30;
+        float rotY = Mathf.Round(mirrorTargets[index].gameObject.transform.rotation.eulerAngles.y / 15) * 15;
         MirrorPlacer.Instance?.RayCastFromARCamera(pos, rotY, index);
         isTracked[index] = true;
     }
