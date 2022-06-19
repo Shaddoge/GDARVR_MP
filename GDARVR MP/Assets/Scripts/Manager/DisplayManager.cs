@@ -50,7 +50,7 @@ public class DisplayManager : MonoBehaviour
             preview.sprite = levelDetails.level.levelPreview;
 
             levelName.text = levelDetails.level.levelName;
-            difficulty.text = (levelDetails.level.levelNumber).ToString() + "%"; // temp
+            difficulty.text = (levelDetails.level.difficulty); // temp
             highscore.text = levelDetails.level.highscore.ToString();
         }
     }

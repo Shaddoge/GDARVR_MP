@@ -13,6 +13,7 @@ public class Level : ScriptableObject
     public bool isLocked = true;
     public int highscore;
     public Level nextLevel;
+    public string difficulty;
     // Start is called before the first frame update
  
 }

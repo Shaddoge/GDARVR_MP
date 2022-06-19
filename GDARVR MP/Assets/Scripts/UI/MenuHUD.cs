@@ -49,11 +49,13 @@ public class MenuHUD : MonoBehaviour
 
     public void ToggleMenu()
     {
+        AudioManager.Instance.PlayButtonSFX();
         menuPanel.SetActive(!menuPanel.activeSelf);
     }
 
     public void FocusCamera()
     {
+        AudioManager.Instance.PlayLockSFX();
         // Start coroutine
         StartCoroutine(ChangeFocusMode());
     }
@@ -72,11 +74,13 @@ public class MenuHUD : MonoBehaviour
 
     public void ResetMirrors()
     {
+        AudioManager.Instance.PlayLockSFX();
         EventManager.Instance?.ResetMirrors();
     }
 
     public void LevelSelect()
     {
+        
         SCENE_MANAGER.Instance?.OpenLevelSelect();
     }
 }

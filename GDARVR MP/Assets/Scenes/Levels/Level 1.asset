@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9a630cb52aa0d249a38d999508938aa, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
-  levelName: First Level
+  levelName: Chamber I
   SceneName: Level 1
-  levelPreview: {fileID: 21300000, guid: 647f31307f73f8646840f2b41bb3a8d9, type: 3}
+  levelPreview: {fileID: 21300000, guid: aee77fbd93a35ca41a3feeda36f1f446, type: 3}
   levelNumber: 1
   isLocked: 0
   highscore: 0
   nextLevel: {fileID: 11400000, guid: cec3f3e32b67ffe419e351ab258bb653, type: 2}
+  difficulty: Easy
