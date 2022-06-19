@@ -16,6 +16,6 @@ MonoBehaviour:
   SceneName: Level 4
   levelPreview: {fileID: 21300000, guid: 2ab79e33261ac3149a3173b43f013448, type: 3}
   levelNumber: 4
-  isLocked: 0
-  highscore: 1250
+  isLocked: 1
+  highscore: 0
   nextLevel: {fileID: 11400000, guid: 9a64589e1310ff94d9adccb8abfc1613, type: 2}
