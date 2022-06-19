@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelName: Chamber II
   SceneName: Level 2
-  levelPreview: {fileID: 21300000, guid: 35c2a980e84cc8649931b9f252fc4258, type: 3}
+  levelPreview: {fileID: 21300000, guid: 710f01226a3b38a488f775589debbd53, type: 3}
   levelNumber: 2
   isLocked: 1
   highscore: 0
