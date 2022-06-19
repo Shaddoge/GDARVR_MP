@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 4
   m_EditorClassIdentifier: 
   levelName: Fourth Level
-  SceneName: test
+  SceneName: Level 4
   levelPreview: {fileID: 21300000, guid: 2ab79e33261ac3149a3173b43f013448, type: 3}
   levelNumber: 4
   isLocked: 1

@@ -14,9 +14,10 @@ public class LockMirrorManager : MonoBehaviour
     [SerializeField] private GameObject buttonPrefab;
 
     private List<bool> lockList = new List<bool>();
+    private List<Button> buttonList = new List<Button>(); 
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         if (instance != null)
         {
@@ -29,6 +30,7 @@ public class LockMirrorManager : MonoBehaviour
             instance = this;
 
             EventManager.Instance.OnInitializeMirrors += InitializeButtons;
+            EventManager.Instance.OnResetMirrors += ResetLocks;
         }
     }
 
@@ -38,7 +40,7 @@ public class LockMirrorManager : MonoBehaviour
         for (int i = 0; i < numMirrors; i++)
         {
             int index = i;
-            lockList.Add(false);
+            
             GameObject newButtonObj = GameObject.Instantiate(buttonPrefab);
             newButtonObj.GetComponentInChildren<Text>().text = (i + 1).ToString();
 
@@ -48,7 +50,10 @@ public class LockMirrorManager : MonoBehaviour
                 ToggleLock(button, index);
                 });
 
-            newButtonObj.transform.parent = lockPanel.transform;
+            lockList.Add(false);
+            buttonList.Add(button);
+
+            newButtonObj.transform.SetParent(lockPanel.transform);
         }
     }
 
@@ -58,15 +63,28 @@ public class LockMirrorManager : MonoBehaviour
         Debug.Log(index);
 
         lockList[index] = !lockList[index];
-        bool locked = lockList[index]; 
 
-        Debug.Log(lockList[index]);
-        if(locked)
+        if(lockList[index])
             button.image.color = new Color32(0, 150, 180, 175);
         else
             button.image.color = new Color32(0, 0, 0, 175);
 
-        EventManager.Instance?.ToggleLocked(index, locked);
+        EventManager.Instance?.ToggleLocked(index, lockList[index]);
+    }
+
+    private void ResetLocks()
+    {
+        for (int i = 0; i < buttonList.Count; i++)
+        {
+            lockList[i] = false;
+
+            if(lockList[i])
+                buttonList[i].image.color = new Color32(0, 150, 180, 175);
+            else
+                buttonList[i].image.color = new Color32(0, 0, 0, 175);
+
+            EventManager.Instance?.ToggleLocked(i, false);
+        }
     }
 
     private void OnDestroy()
@@ -74,6 +92,7 @@ public class LockMirrorManager : MonoBehaviour
         if(!existing)
         {
             EventManager.Instance.OnInitializeMirrors -= InitializeButtons;
+            EventManager.Instance.OnResetMirrors -= ResetLocks;
         }
     }
 }

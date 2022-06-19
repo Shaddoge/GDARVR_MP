@@ -43,13 +43,16 @@ public class AudioManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
 
-        AudioManager.instance.PlayMainBGM();
+        PlayMainBGM();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        /*if(musicSource.isPlaying == false)
+        {
+            PlayMainBGM();
+        }*/
     }
 
     private void OnDestroy()
@@ -62,7 +65,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMainBGM()
     {
-        musicSource.PlayOneShot(gameBGM);
+        musicSource.Play();
     }
 
     public void PlayLvlSelectSFX()
