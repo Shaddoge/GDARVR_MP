@@ -10,6 +10,9 @@ public class CrystalBehavior : MonoBehaviour
     private bool charging;
     private Animator animator;
 
+    [Header("Debug controls")]
+    [SerializeField] bool AutoChargeCrystal = false;
+
     [Header("Particles")]
     [SerializeField] private ParticleSystem chargeParticle;
     [SerializeField] private ParticleSystem burstParticle;
@@ -22,6 +25,12 @@ public class CrystalBehavior : MonoBehaviour
 
     private void Update()
     {
+        // debug
+        if (AutoChargeCrystal == true)
+        {
+            HeatUp();
+        }
+
         if (chargeTimeGoal < chargedTime) return;
         if (charging)
             timeNotCharged += Time.deltaTime;

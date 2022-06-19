@@ -53,6 +53,7 @@ public class LevelManager : ScriptableObject
 
     public void ResetLevelData()
     {
+        AudioManager.Instance.PlayButtonSFX();
         for (int i = 0; i < levelList.Length; i++)
         {
             Level level = levelList[i];
